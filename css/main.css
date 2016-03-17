@@ -1,0 +1,66 @@
+body {
+  background-color: white;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+}
+
+.navlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: #dddddd;
+}
+
+.navli {
+  display: block;
+  padding: 10px;
+}
+
+.navright {
+  float: right;
+}
+
+.navleft {
+  float: left;
+}
+#heading{
+  color: black;
+  font-weight: bold;
+}
+ul {
+  margin-left: 40%;
+}
+h1 {
+  font-size: 3em;
+  text-align: center;
+}
+h2 {
+  font-size: 2em;
+  text-align: center;
+}
+div.register {
+  padding-top:10px;
+  padding-bottom:10px;
+  background-color: lightgrey;
+  text-align:center;
+}
+
+input:focus {
+    border: 1px solid #555;
+}
+
+table {
+  width:80%;
+  margin:auto;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+p {
+  text-align:center;
+}
