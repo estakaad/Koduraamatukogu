@@ -2,27 +2,36 @@
 <html>
 <head>
 <title>Koduraamatukogu</title>
- <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="css/main.css">
+   <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <ul class="navlist">
-  <li class="navli navleft" id="heading">Koduraamatukogu</li>
+  <li class="navli navleft"><h2>Koduraamatukogu</h2></li>
   <li class="navli navright"><input type="submit" name="login" value="Logi sisse"></li>
   <li class="navli navright"><input type="password" name="password" placeholder="Salasõna"></li>
   <li class="navli navright"><input type="email" name="email" placeholder="E-posti aadress"></li>
 </ul>
-
-<main>
-  <h1>Koduraamatukogu hoiuraamat</h1>
+<header>  
+  <h1>Koduraamatukogu</h1>
   
-  <p>Pea arvet riiulites olevate ja välja laenatud raamatute üle.</p>
+  <p>Ülevaade kõigist su raamatutest:</p>
+
+  <ul>
+    <li>ostetud raamatud</li>
+    <li>laenuks saadud raamatud</li>
+    <li>välja laenatud raamatud</li>
+    <li>raamatud, mida tahaksid osta või kingiks saada</li>
+  </ul></header>
+<main>
+
   
   <div class="register">
-  
-    <input type="email" name="email" size="35" placeholder="E-posti aadress"><br>
-    <input type="password" name="password" size="35" placeholder="Salasõna"><br>
-    <input type="submit" name="register" size="35" value="Registreeru kasutajaks"><br>
+      <form action="action_page.php">
+        <input type="email" class="registerforms" placeholder="E-posti aadress">
+        <input type="password" class="registerforms" placeholder="Salasõna">
+        <input type="submit" class="registerforms" value="Registreeru kasutajaks">
+    </form>
   </div>
   
 </main>

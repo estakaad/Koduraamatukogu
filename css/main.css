@@ -3,6 +3,9 @@ body {
   font-family: "Arial", sans-serif;
   margin: 0;
 }
+main {
+  background-color: #f2f2f2;
+}
 
 .navlist {
   list-style-type: none;
@@ -24,10 +27,6 @@ body {
 .navleft {
   float: left;
 }
-#heading{
-  color: black;
-  font-weight: bold;
-}
 ul {
   margin-left: 40%;
 }
@@ -38,12 +37,50 @@ h1 {
 h2 {
   font-size: 2em;
   text-align: center;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 div.register {
-  padding-top:10px;
-  padding-bottom:10px;
-  background-color: lightgrey;
-  text-align:center;
+    width: 20%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 40px;
+    margin: auto;
+}
+
+input[type=email], select {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
 }
 
 input:focus {
@@ -61,6 +98,7 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+
 p {
   text-align:center;
 }
