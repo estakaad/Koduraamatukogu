@@ -1,40 +1,82 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Koduraamatukogu</title>
-   <meta charset="UTF-8">
-   <link rel="stylesheet" type="text/css" href="css/main.css">
+	<title>Koduraamatukogu</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<ul class="navlist">
-  <li class="navli navleft"><h2>Koduraamatukogu</h2></li>
-  <li class="navli navright"><input type="submit" name="login" value="Logi sisse"></li>
-  <li class="navli navright"><input type="password" name="password" placeholder="Salasõna"></li>
-  <li class="navli navright"><input type="email" name="email" placeholder="E-posti aadress"></li>
-</ul>
-<header>  
-  <h1>Koduraamatukogu</h1>
-  
-  <p>Ülevaade kõigist su raamatutest:</p>
 
-  <ul>
-    <li>ostetud raamatud</li>
-    <li>laenuks saadud raamatud</li>
-    <li>välja laenatud raamatud</li>
-    <li>raamatud, mida tahaksid osta või kingiks saada</li>
-  </ul></header>
-<main>
+<div class="container">
+	<p></p>
+</div>
 
-  
-  <div class="register">
-      <form action="action_page.php">
-        <input type="email" class="registerforms" placeholder="E-posti aadress">
-        <input type="password" class="registerforms" placeholder="Salasõna">
-        <input type="submit" class="registerforms" value="Registreeru kasutajaks">
-    </form>
-  </div>
-  
-</main>
+<div class="container-fluid">
+	<div class="jumbotron">
+	    <h1>Koduraamatukogu</h1>
+	    <p>Pea arvet raamatute üle, mis on su enda omad, mida oled kelleltki laenanud või mille oled kellelegi ise välja laenanud.</p>
+	    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#logIn">Logi sisse</button>
+	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerUser">Registreeru</button>
+	   	
+
+		<div class="modal fade" id="registerUser">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Registreeru kasutajaks</h3>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+							<div class="form-group">
+								<input type="email" class="form-control" placeholder="E-mail">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" placeholder="Parool">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-block">Registreeru</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="logIn">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Logi sisse</h3>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+							<div class="form-group">
+								<input type="email" class="form-control" placeholder="E-mail">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" placeholder="Parool">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-block">Logi sisse</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="jquery.backstretch.min.js"/></script>
+<script>
+	$.backstretch("Philip Fibiger flickr.jpg");
+</script>
 
 </body>
-</html> 
+</html>
