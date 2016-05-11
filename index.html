@@ -17,59 +17,65 @@
 </div>
 
 <div class="container-fluid">
-	<div class="jumbotron">
-	    <h1>Koduraamatukogu</h1>
-	    <p>Pea arvet raamatute üle, mis on su enda omad, mida oled kelleltki laenanud või mille oled kellelegi ise välja laenanud.</p>
-	    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#logIn">Logi sisse</button>
-	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerUser">Registreeru</button>
-	   	
-
-		<div class="modal fade" id="registerUser">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title">Registreeru kasutajaks</h3>
-					</div>
-					<div class="modal-body">
-						<form role="form">
-							<div class="form-group">
-								<input type="email" class="form-control" placeholder="E-mail">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="jumbotron">
+			    <h2>Koduraamatukogu</h2>
+			    <p>Pea arvet raamatute üle, mis on su enda omad, mida oled kelleltki laenanud või mille oled ise kellelegi välja laenanud.</p>
+				<div class="control-group">
+			    	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#logIn">Logi sisse</button>
+			    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerUser">Registreeru</button>
+					<div class="modal fade" id="registerUser">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="modal-title">Registreeru kasutajaks</h3>
 							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Parool">
+							<div class="modal-body">
+								<form role="form">
+									<div class="form-group">
+										<input type="email" class="form-control" placeholder="E-mail">
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" placeholder="Parool">
+									</div>
+								</form>
 							</div>
-						</form>
+							<div class="modal-footer">
+								<button class="btn btn-primary btn-block">Registreeru</button>
+							</div>
+						</div>
 					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary btn-block">Registreeru</button>
 					</div>
-				</div>
+					<div class="modal fade" id="logIn">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="modal-title">Logi sisse</h3>
+							</div>
+							<div class="modal-body">
+								<form role="form">
+									<div class="form-group">
+										<input type="email" class="form-control" placeholder="E-mail">
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" placeholder="Parool">
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary btn-block">Logi sisse</button>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>	
 			</div>
 		</div>
-		<div class="modal fade" id="logIn">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title">Logi sisse</h3>
-					</div>
-					<div class="modal-body">
-						<form role="form">
-							<div class="form-group">
-								<input type="email" class="form-control" placeholder="E-mail">
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" placeholder="Parool">
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary btn-block">Logi sisse</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="col-md-4"></div>
 	</div>
 </div>
 
