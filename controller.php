@@ -2,25 +2,21 @@
 session_start();
 require_once("views/header.html");
 
-$page = "index";
-if (isset($_GET['page']) && $_GET['page']!=""){
-	$page=htmlspecialchars($_GET['page']);
+$page = "";
+
+if (isset($_POST['loginmail']) && isset($_POST['loginpassword']){
+	$page=htmlspecialchars($_POST['login']);
 }
+
 switch($page){
 	case "login":
-		include("views/main.html");
+		include("views/main.php");
 	break;
 	case "register":
-		include("views/main.html");
-	break;
-	case "logout":
-		include("views/index.html");	
-	break;
-	case "books":
-		include("views/books.html");	
+		include("views/register.php");
 	break;
 	default:
-		include('views/index.html');	
+		include('views/login.php');	
 }
 
 require_once("views/footer.html");
