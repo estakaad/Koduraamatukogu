@@ -19,6 +19,7 @@
 					<div class="navbar-header">
 						<a href="?page=index" class="navbar-brand">Koduraamatukogu</a>
 					</div>
+					<?php if(isset($_SESSION['user'])): ?>
 					<div>
 						<ul class="nav navbar-nav navbar-left">
 						<li><a href="?page=view">Vaata</a></li>
@@ -30,15 +31,15 @@
 						<ul class="nav navbar-nav navbar-right">
 						<li role="presentation" class="dropdown">
 						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						      Kasutaja nimi <span class="caret"></span>
+						      <?php echo $_SESSION['user']; ?><span class="caret"></span>
 						    </a>
    						 <ul class="dropdown-menu">
    							<li><a href="?page=settings">Seaded</a></li>
 							<li><a href="?page=logout">Logi välja</a></li>
 					    </ul>
-  </li>
+  						</li>
 					</div>
-					
+				<?php endif; ?>
 			</div>
 			<div class="col-md-1"></div>
 		</div>	
