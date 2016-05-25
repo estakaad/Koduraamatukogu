@@ -25,8 +25,6 @@ function register(){
   		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE email='$users_email'");
 		$row = mysqli_fetch_assoc($query);
 
-		//print_r($row);
-
 		if($row['count_rows'] > 0){
 			$errors[] = "Selle e-posti aadressiga on juba registreeritud kasutaja.";
 		}
@@ -56,8 +54,6 @@ function register(){
 
 			$rows = mysqli_affected_rows($connection);
 
-			print_r($rows);
-
 			if($rows > 0){
 				$_SESSION['user'] = $users_name;
 			} 
@@ -72,8 +68,8 @@ function register(){
 
 function login(){
 	
-	if (!empty($_SESSION['user'])) {
-		include_once 'views/login.html';
+	if (isset($_SESSION['user'])) {
+		include_once 'views/view_books.html';
 	}
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
@@ -81,13 +77,21 @@ function login(){
 		$errors = array();
 
 		global $connection;
-  		$users_email = mysqli_real_escape_string($connection, $_POST["login_email"]);
-  		$users_password = mysqli_real_escape_string($connection, $_POST["login_password"]);
-  		$query = mysqli_query($connection, "SELECT id FROM eprangel_users WHERE email='$users_email' && passw=SHA1('$users_password')");
-		$result = mysqli_query($connection, $query) or die("midagi läks valesti");
-		if(!$result){
-			$errors[] = "E-posti aadress ja salasõna ei klapi.";
+		print_r($_POST['login_email']);
+		print_r($_POST['login_password']);
+  		$users_email = mysqli_real_escape_string($connection, $_POST['login_email']);
+  		$users_password = mysqli_real_escape_string($connection, $_POST['login_password']);
+  		
+  		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE email='$users_email' AND passw=SHA1('$users_password')");
+
+		$row = mysqli_fetch_assoc($query);
+
+		print_r($row['count_rows']);
+
+		if($row['count_rows'] != 1){
+			$errors[] = "Sisselogimine ebaõnnestus.";
 		}
+
 		if(empty($_POST['login_email'])) {
 			$errors[] = "E-posti aadress on puudu.";
 		}
@@ -95,16 +99,14 @@ function login(){
 			$errors[] = "Salasõna on puudu.";
 		}
 
-		$query = mysqli_query($connection, "SELECT name FROM eprangel_users WHERE email='$users_email'");
-		$result = mysqli_query($connection, $query) or die("Midagi läks valesti");
-
 		if (empty($errors)) {
-			$_SESSION['user'] = $result;
-			include_once 'views/view_books.html';
-		} else {
-			include_once 'views/login.html';
-		}
+			$query = mysqli_query($connection, "SELECT name AS session_name FROM eprangel_users WHERE email='$users_email'");
+			$result = mysqli_fetch_assoc($query);
+			$_SESSION['user'] = $result['session_name'];
 
+		} else {
+			include_once 'views/index.html';
+		}
 
 	}
 

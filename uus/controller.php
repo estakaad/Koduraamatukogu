@@ -14,6 +14,9 @@ connect_db();
 		case "registersuccess":
 			register();
 			break;
+		case "loginsuccess":
+			login();
+			break;	
 		case "logout":
 			logout();
 			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=index");
@@ -30,10 +33,7 @@ connect_db();
 			break;
 		case "register":
 			include('views/register.html');				
-			break;
-		case "registersuccess":
-			include('views/register_success.html');		
-			break;			
+			break;	
 		case "add":
 			include('views/add_book.html');
 			break;
@@ -42,9 +42,6 @@ connect_db();
 			break;
 		case "settings":
 			include('views/settings.html');
-			break;
-		case "logout":
-			include('views/index.html');
 			break;
 		default:
 			include('views/index.html');
