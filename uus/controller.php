@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-require_once('views/head.html');
+require_once('model.php'); 
+session_start();
+connect_db();
 	
 	$page = "index";
 
@@ -9,31 +11,45 @@ require_once('views/head.html');
 	}
 
 	switch($page){
+		case "registersuccess":
+			register();
+			break;
+		case "logout":
+			logout();
+			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=index");
+		}
+
+	require_once('views/head.html'); 
+
+	switch($page){
 		case "index":
 			include('views/index.html');
-		break;		
+			break;		
 		case "login":
 			include('views/login.html');
-		break;
+			break;
 		case "register":
-			include('views/register.html');
-		break;
+			include('views/register.html');				
+			break;
+		case "registersuccess":
+			include('views/register_success.html');		
+			break;			
 		case "add":
 			include('views/add_book.html');
-		break;
+			break;
 		case "view":
 			include('views/view_books.html');
-		break;
+			break;
 		case "settings":
 			include('views/settings.html');
-		break;
+			break;
 		case "logout":
-			include('views/logout.html');
-		break;
+			include('views/index.html');
+			break;
 		default:
 			include('views/index.html');
 	} 
 
-require_once('views/foot.html'); 
+	require_once('views/foot.html'); 
 
 ?>
