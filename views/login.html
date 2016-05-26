@@ -1,12 +1,21 @@
-<div id="login">
-	<form action="?page=login" method="POST" >
-		<input type="text" name="user" placeholder="kasutajanimi"/><br/>
-		<input type="password" name="pass" placeholder="parool"/><br/>
-		<input type="submit" value="logi sisse!"/>
-	</form>
-	<?php if (isset($errors)):?>
-		<?php foreach($errors as $error):?>
-			<div style="color:red;"><?php echo htmlspecialchars($error); ?></div>
-		<?php endforeach;?>
-	<?php endif;?>
+
+<div class="container-fluid">
+		<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+				<div class="well">
+					<form class="form-signin" action="controller.php?page=loginsuccess"  method="post">
+				        <h2 class="form-signin-heading">Logi sisse</h2>
+				        
+				        <label for="inputEmail" class="sr-only">E-posti aadress</label>
+				        <input type="email" id="inputEmail" class="form-control" name="login_email" placeholder="Email address" required autofocus>
+				        
+				        <label for="inputPassword" class="sr-only">Salasõna</label>
+				        <input type="password" id="inputPassword" class="form-control" name="login_password" placeholder="Password" required>
+				        
+				        <button class="btn btn-lg btn-primary btn-block" type="submit">Logi sisse</button>
+				      </form>
+				<div class="col-md-1"></div>
+				</div>
+		</div>
 </div>
