@@ -1,23 +1,58 @@
 <?php
+
+require_once('model.php'); 
 session_start();
-require_once("views/header.html");
+connect_db();
+	
+	$page = "index";
 
-$page = "";
+	if (isset($_GET['page']) && $_GET['page']!=""){
+		$page=htmlspecialchars($_GET['page']);
+	}
 
-if (isset($_POST['loginmail']) && isset($_POST['loginpassword']){
-	$page=htmlspecialchars($_POST['login']);
-}
+	switch($page){
+		case "registersuccess":
+			register();
+			break;
+		case "loginsuccess":
+			login();
+			break;	
+		case "passwordchanged"	:
+			changePassword();
+			break;
+		case "logout":
+			logout();
+			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=index");
+		}
 
-switch($page){
-	case "login":
-		include("views/main.php");
-	break;
-	case "register":
-		include("views/register.php");
-	break;
-	default:
-		include('views/login.php');	
-}
+	require_once('views/head.html'); 
 
-require_once("views/footer.html");
+	switch($page){
+		case "index":
+			include('views/index.html');
+			break;		
+		case "login":
+			include('views/login.html');
+			break;
+		case "register":
+			include('views/register.html');				
+			break;	
+		case "passwordchanged":
+			include('views/passwordchanged.html');	
+			break;	
+		case "add":
+			include('views/add_book.html');
+			break;
+		case "view":
+			include('views/view_books.html');
+			break;
+		case "settings":
+			include('views/settings.html');
+			break;
+		default:
+			include('views/index.html');
+	} 
+
+	require_once('views/foot.html'); 
+
 ?>

@@ -1,166 +1,184 @@
 <?php
 
-
 function connect_db(){
 	global $connection;
 	$host="localhost";
 	$user="test";
 	$pass="t3st3r123";
 	$db="test";
-	$connection = mysqli_connect($host, $user, $pass, $db) or die("ei saa ühendust mootoriga- ".mysqli_error());
-	mysqli_query($connection, "SET CHARACTER SET UTF8") or die("Ei saanud baasi utf-8-sse - ".mysqli_error($connection));
+	$connection = mysqli_connect($host, $user, $pass, $db) or die("Ei saa ühendust mootoriga: ".mysqli_error());
+	mysqli_query($connection, "SET CHARACTER SET UTF8") or die("Ei saanud baasi UTF-8-sse: ".mysqli_error($connection));
 }
 
-
-function kuva_puurid(){
-	//Kontrollib, kas kasutaja on sisse logitud. Kui pole, suunab sisselogimise vaatesse
+function register(){
+	
 	if (!empty($_SESSION['user'])) {
-		global $connection;
-		$p= mysqli_query($connection, "select distinct(puur) as puur from eprangel_loomaaed order by puur asc");
-		$puurid=array();
-		while ($r=mysqli_fetch_assoc($p)){
-			$l=mysqli_query($connection, "SELECT * FROM eprangel_loomaaed WHERE  puur=".mysqli_real_escape_string($connection, $r['puur']));
-			while ($row=mysqli_fetch_assoc($l)) {
-				$puurid[$r['puur']][]=$row;
-			}
-		}
-		include_once('views/puurid.html');
-	} else {
-		include_once 'views/login.html';
+		include_once 'views/register.html';
 	}
-	
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+
+		$errors = array();
+
+		global $connection;
+  		$users_email = mysqli_real_escape_string($connection, $_POST["email"]);
+  		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE email='$users_email'");
+		$row = mysqli_fetch_assoc($query);
+
+		if($row['count_rows'] > 0){
+			$errors[] = "Selle e-posti aadressiga on juba registreeritud kasutaja.";
+		}
+  		if(empty($_POST['name'])) {
+	    	$errors[] = "Nimi on puudu.";
+		}
+		if(empty($_POST['email'])) {
+			$errors[] = "E-posti aadress on puudu.";
+		}
+		if(empty($_POST['password1'])) {
+			$errors[] = "Salasõna on puudu.";
+		}
+		if(empty($_POST['password2'])) {
+			$errors[] = "Salasõna kordus on puudu.";
+		}
+		if($_POST['password1'] != $_POST['password2']) {
+			$errors[] = "Salasõnad ei ole ühesugused.";
+		}
+
+		if (empty($errors)) {
+
+			$users_name = mysqli_real_escape_string($connection, $_POST['name']);
+	  		$users_email = mysqli_real_escape_string($connection, $_POST['email']);
+	  		$users_password = mysqli_real_escape_string($connection, $_POST['password1']);
+
+			$result = mysqli_query($connection, "INSERT INTO eprangel_users (name, email, passw) VALUES ('$users_name', '$users_email', SHA1('$users_password'))");
+
+			$rows = mysqli_affected_rows($connection);
+
+			if($rows > 0){
+				$_SESSION['user'] = $users_name;
+			} 
+		
+		} else {
+			include_once 'views/register.html';
+		}
+
+	}
+
 }
 
-function logi(){
-	//Kontrollib, kas kasutaja on juba sisse logitud. Kui on, suunab loomade vaatesse (sisselogitud kasutaja ei pea ju uuesti sisse logima)
-
-	if (isset($_POST['user'])) {
-		include_once('views/puurid.html');
-	}
-
-	//kontrollib, kas kasutaja on üritanud juba vormi saata. Kas päring on tehtud POST (vormi esitamisel) või GET (lingilt tulles) meetodil, saab teada serveri infost, mis asub massiivist $_SERVER võtmega 'REQUEST_METHOD'
-
-	if (isset($_SERVER['REQUEST_METHOD'])) {
-
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		  	
-		  	//Kui meetodiks oli POST, kontrollida kas vormiväljad olid täidetud. Vastavalt vajadusele tekitada veateateid (massiiv $errors)
-		  	$errors = array();
-		  	if (empty($_POST['user']) || empty($_POST['pass'])) {
-		  		if(empty($_POST['user'])) {
-			    	$errors[] = "kasutajanimi on puudu";
-				}
-				if(empty($_POST['pass'])) {
-					$errors[] = "parool on puudu";
-				} 
-		  	} else {
-		  		//kui kõik väljad olid täidetud, üritada andmebaasitabelist <sinu kasutajanimi/kood/>_kylalised selekteerida külalist, kelle kasutajanimi ja parool on vastavad 
-		  		global $connection;
-		  		$username = mysqli_real_escape_string($connection, $_POST["user"]);
-		  		$passw = mysqli_real_escape_string($connection, $_POST["pass"]);
-		  		
-				$query = "SELECT id FROM eprangel_kylastajad WHERE username='$username' && passw=SHA1('$passw')";
-				$result = mysqli_query($connection, $query) or die("midagi läks valesti");
-			
-				//Kui selle SELECT päringu tulemuses on vähemalt 1 rida (seda saab teada mysqli_num_rows funktsiooniga) siis lugeda kasutaja sisselogituks -> luua sessiooniväli 'user' ning suunata ta loomaaia vaatesse
-				$ridu = mysqli_num_rows($result);
-
-					if ( $ridu > 0) {
-						$_SESSION['user'] = $username;
-						header("Location: ?page=loomad");
-					}
-		  	}
-		//igasuguste vigade korral ning lehele esmakordselt saabudes kuvatakse kasutajale sisselogimise vorm failist login.html
-		} else {
-			 include_once 'views/login.html';
-		}
-	}
-
-
+function login(){
 	
+	if (isset($_SESSION['user'])) {
+		include_once 'views/view_books.html';
+	}
 
-	include_once('views/login.html');
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+
+		$errors = array();
+
+		global $connection;
+
+  		$users_email = mysqli_real_escape_string($connection, $_POST['login_email']);
+  		$users_password = mysqli_real_escape_string($connection, $_POST['login_password']);
+  		
+  		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE email='$users_email' AND passw=SHA1('$users_password')");
+
+		$row = mysqli_fetch_assoc($query);
+
+		if($row['count_rows'] != 1){
+			$errors[] = "Sisselogimine ebaõnnestus.";
+		}
+
+		if(empty($_POST['login_email'])) {
+			$errors[] = "E-posti aadress on puudu.";
+		}
+		if(empty($_POST['login_password'])) {
+			$errors[] = "Salasõna on puudu.";
+		}
+		print_r($errors);
+		if (empty($errors)) {
+			$query = mysqli_query($connection, "SELECT name AS session_name FROM eprangel_users WHERE email='$users_email'");
+			$result = mysqli_fetch_assoc($query);
+			$_SESSION['user'] = $result['session_name'];
+			echo $_SESSION['user'];
+
+			$query = mysqli_query($connection, "SELECT id AS session_id FROM eprangel_users WHERE email='$users_email'");
+			$result = mysqli_fetch_assoc($query);
+			$_SESSION['id'] = $result['session_id'];
+			echo $_SESSION['id'];
+
+		} else {
+			include_once 'views/index.html';
+		}
+
+	}
+
+}
+
+function changePassword() {
+	if (isset($_SESSION['user'])) {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+		$errors = array();
+
+		global $connection;
+		$id = $_SESSION['id'];
+  		$old_password = mysqli_real_escape_string($connection, $_POST['old_password']);
+  		echo $old_password;
+  		$new_password1 = mysqli_real_escape_string($connection, $_POST['new_password1']);
+  		$new_password2 = mysqli_real_escape_string($connection, $_POST['new_password2']);
+  		
+  		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE id='$id' AND passw=SHA1('$old_password')");
+
+		$row = mysqli_fetch_assoc($query);
+		
+		echo $row['count_rows'];
+
+		if($row['count_rows'] != 1){
+			$errors[] = "Vale vana parool.";
+		}
+
+		if(empty($_POST['old_password'])) {
+			$errors[] = "Vana salasõna on puudu.";
+		}
+		if(empty($_POST['new_password1'])) {
+			$errors[] = "Uus salasõna on puudu.";
+		}
+		if(empty($_POST['new_password2'])) {
+			$errors[] = "Salasõna kordus on puudu.";
+		}
+		if($_POST['new_password1'] != $_POST['new_password2']) {
+			$errors[] = "Uus salasõna pole see, mis selle kordus.";
+		}
+		print_r($errors);
+		if (empty($errors)) {
+			echo "hakkab salasõna uuendama";
+			$query = mysqli_query($connection, "UPDATE eprangel_users SET passw=SHA1('$new_password1') WHERE id='$id'");
+			$rows = mysqli_affected_rows($connection);
+			print_r($rows);
+		}
+	} else {
+		include_once 'views/settings.html';
+	}	
+
+	}
+}
+
+function addBook(){
+
+}
+
+function showBooks(){
+
 }
 
 function logout(){
-	$_SESSION=array();
 	session_destroy();
-	header("Location: ?");
+
+	unset($_SESSION['user']);
+	$id = false;
 }
 
-function lisa(){
-	//Kontrollib, kas kasutaja on sisse logitud. Kui pole, suunab sisselogimise vaatesse
-	if (empty($_SESSION['user'])) {
-		include_once 'views/login.html';
-	}
-	
-	//kontrollib, kas kasutaja on üritanud juba vormi saata. Kas päring on tehtud POST (vormi esitamisel) või GET (lingilt tulles) meetodil, saab teada serveri infost, mis asub massiivist $_SERVER võtmega 'REQUEST_METHOD'
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		//kui meetodiks oli POST, tuleb kontrollida, kas kõik vormiväljad olid täidetud ja tekitada vajadusel vastavaid veateateid (massiiv $errors). 
-		$errors = array();
-  	
-  		if(empty($_POST['nimi'])) {
-	    	$errors[] = "nimi on puudu";
-		}
-		if(empty($_POST['puur'])) {
-			$errors[] = "puur on puudu";
-		}
-		
-		$pilt = upload("liik");
 
-		if ($pilt == "") {
-			$errors[] = "pilt on puudu";
-		}
-
-	  	if (empty($errors)) {
-	  		//Kui vigu polnud, siis üritada see loom andmebaasitabelisse <sinu kasutajanimi/kood/>_loomaaed lisada. 
-	  		global $connection;
-
-	  		$loomanimi = mysqli_real_escape_string($connection, $_POST["nimi"]);
-	  		$puurinr = mysqli_real_escape_string($connection, $_POST["puur"]);
-
-			$query = "INSERT INTO eprangel_loomaaed (nimi, liik, puur) VALUES ('$loomanimi', '$pilt', '$puurinr')";
-			$result = mysqli_query($connection, $query) or die("midagi läks valesti");;
-		
-			//Kas looma lisamine õnnestus või mitte, saab teada kui kontrollida mis väärtuse tagastab mysqli_insert_id funktsioon. Kui väärtus on nullist suurem, suunata kasutaja loomade vaatessse 
-
-			if (mysqli_insert_id($connection) > 0) {
-				header("Location: ?page=loomad");
-			}
-	  	} 
-
-	}
-
-	include_once('views/loomavorm.html');
-}
-
-function upload($name){
-	$allowedExts = array("jpg", "jpeg", "gif", "png");
-	$allowedTypes = array("image/gif", "image/jpeg", "image/png","image/pjpeg");
-	$extension = end(explode(".", $_FILES[$name]["name"]));
-
-	if ( in_array($_FILES[$name]["type"], $allowedTypes)
-		&& ($_FILES[$name]["size"] < 100000)
-		&& in_array($extension, $allowedExts)) {
-    // fail õiget tüüpi ja suurusega
-		if ($_FILES[$name]["error"] > 0) {
-			$_SESSION['notices'][]= "Return Code: " . $_FILES[$name]["error"];
-			return "";
-		} else {
-      // vigu ei ole
-			if (file_exists("pildid/" . $_FILES[$name]["name"])) {
-        // fail olemas ära uuesti lae, tagasta failinimi
-				$_SESSION['notices'][]= $_FILES[$name]["name"] . " juba eksisteerib. ";
-				return "pildid/" .$_FILES[$name]["name"];
-			} else {
-        // kõik ok, aseta pilt
-				move_uploaded_file($_FILES[$name]["tmp_name"], "pildid/" . $_FILES[$name]["name"]);
-				return "pildid/" .$_FILES[$name]["name"];
-			}
-		}
-	} else {
-		return "";
-	}
-}
 
 ?>
