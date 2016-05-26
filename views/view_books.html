@@ -4,7 +4,7 @@
 			<div class="col-md-8">
 			<div class="well">
 			
-			
+			<h2>Kelleltki laenatud raamatud</h2>
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<tr>
@@ -23,13 +23,75 @@
 					print_r("<td>".$value['title']."</td>");
 					print_r("<td>".$value['status']."</td>");
 					print_r("<td>".$value['notes']."</td>");
-					print_r("<td>Muuda</td>");
-					print_r("<td><button type=\"button\" class=\"close\" aria-label=\"Close\">
+					print_r("<td><a href=\"?page=editbook\">Muuda</a></td>");
+					print_r("<td><button type=\"button\" class=\"close\" aria-label=\"Kustuta\">
 							  		<span aria-hidden=\"true\">&times;</span>
 								</button></td>");
 					print_r("</tr>");}
 				?>
 				</table>
+			</div>
+			<div class="col-md-2"></div>
+			</div>
+			<div class="well">
+			
+			<h2>Kellelegi laenatud raamatud</h2>
+			<div class="table-responsive">
+				<table class="table table-striped">
+				<tr>
+					<th>Perekonnanimi</th>
+					<th>Eesnimi</th>
+					<th>Pealkiri</th>
+					<th>Staatus</th>
+					<th>Märkmed</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<?php foreach($books as $key=>$value) {
+					print_r("<tr>");
+					print_r("<td>".$value['last_name']."</td>");
+					print_r("<td>".$value['first_name']."</td>");
+					print_r("<td>".$value['title']."</td>");
+					print_r("<td>".$value['status']."</td>");
+					print_r("<td>".$value['notes']."</td>");
+					print_r("<td><a href=\"?page=editbook\">Muuda</a></td>");
+					print_r("<td><button type=\"button\" class=\"close\" aria-label=\"Kustuta\">
+							  		<span aria-hidden=\"true\">&times;</span>
+								</button></td>");
+					print_r("</tr>");}
+				?>
+				</table>
+			</div>
+			<div class="col-md-2"></div>
+			</div>
+<div class="well">
+			<h2>Riiulis olevad raamatud</h2>
+			<div class="table-responsive">
+				<table class="table table-striped">
+				<tr>
+					<th>Perekonnanimi</th>
+					<th>Eesnimi</th>
+					<th>Pealkiri</th>
+					<th>Staatus</th>
+					<th>Märkmed</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<?php foreach($books as $key=>$value) {
+					print_r("<tr>");
+					print_r("<td>".$value['last_name']."</td>");
+					print_r("<td>".$value['first_name']."</td>");
+					print_r("<td>".$value['title']."</td>");
+					print_r("<td>".$value['status']."</td>");
+					print_r("<td>".$value['notes']."</td>");
+					print_r("<td><a href=\"?page=editbook\">Muuda</a></td>");
+					print_r("<td><button type=\"button\" class=\"close\" aria-label=\"Kustuta\">
+							  		<span aria-hidden=\"true\">&times;</span>
+								</button></td>");
+					print_r("</tr>");}
+				?>
+				</table>
+			</div>
 			</div>
 			<div class="col-md-2"></div>
 			</div>
