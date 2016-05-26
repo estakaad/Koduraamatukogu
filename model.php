@@ -161,6 +161,47 @@ function changePassword() {
 }
 
 function addBook(){
+	print_r("hakkab lisama");
+	if (isset($_SESSION['user'])) {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		
+		$errors = array();
+
+		if(empty($_POST['author_lastname'])) {
+			$errors[] = "Autori perekonnanimi on puudu.";
+		}
+		if(empty($_POST['author_firstname'])) {
+			$errors[] = "Autori eesnimi on puudu.";
+		}
+		if(empty($_POST['book_title'])) {
+			$errors[] = "Teose pealkiri on puudu.";
+		}
+
+		global $connection;
+		$id = $_SESSION['id'];
+
+  		$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
+  		$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
+  		$title = mysqli_real_escape_string($connection, $_POST['book_title']);
+  		$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
+
+		if (empty($errors)) {
+			$result = mysqli_query($connection, "INSERT INTO eprangel_books (user_id, last_name, first_name, title, notes) VALUES ('$id', '$lastname', '$firstname', '$title', '$notes')");
+
+			$rows = mysqli_affected_rows($connection);
+
+			if($rows > 0){
+				include_once 'views/view_books.html';
+			} 
+		
+		} else {
+			print_r("midagi on valesti");
+			include_once 'views/add_book.html';
+		} 
+
+		}
+
+	}
 
 }
 

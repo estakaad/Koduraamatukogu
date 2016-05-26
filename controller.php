@@ -14,6 +14,10 @@ connect_db();
 		case "registersuccess":
 			register();
 			break;
+		case "bookadded":
+			addBook();
+			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			break;
 		case "loginsuccess":
 			login();
 			break;	
