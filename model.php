@@ -95,7 +95,7 @@ function login(){
 		if(empty($_POST['login_password'])) {
 			$errors[] = "Salasõna on puudu.";
 		}
-		print_r($errors);
+
 		if (empty($errors)) {
 			$query = mysqli_query($connection, "SELECT name AS session_name FROM eprangel_users WHERE email='$users_email'");
 			$result = mysqli_fetch_assoc($query);
@@ -107,8 +107,6 @@ function login(){
 			$_SESSION['id'] = $result['session_id'];
 			echo $_SESSION['id'];
 
-		} else {
-			include_once 'views/index.html';
 		}
 
 	}
@@ -124,15 +122,13 @@ function changePassword() {
 		global $connection;
 		$id = $_SESSION['id'];
   		$old_password = mysqli_real_escape_string($connection, $_POST['old_password']);
-  		echo $old_password;
+  		
   		$new_password1 = mysqli_real_escape_string($connection, $_POST['new_password1']);
   		$new_password2 = mysqli_real_escape_string($connection, $_POST['new_password2']);
   		
   		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE id='$id' AND passw=SHA1('$old_password')");
 
 		$row = mysqli_fetch_assoc($query);
-		
-		echo $row['count_rows'];
 
 		if($row['count_rows'] != 1){
 			$errors[] = "Vale vana parool.";
@@ -168,7 +164,23 @@ function addBook(){
 
 }
 
-function showBooks(){
+function viewBooks(){
+	if (isset($_SESSION['user'])) {
+		
+		global $connection;
+		$id = $_SESSION['id'];
+		$query = mysqli_query($connection, "SELECT * FROM eprangel_books WHERE user_id='$id'");
+		
+		$row = mysqli_fetch_assoc($query);
+		
+		$books = array();
+
+		$result = $connection->query("SELECT last_name, first_name, title, status, notes FROM eprangel_books WHERE user_id='$id'");
+		for ($books = array (); $row = $result->fetch_assoc(); $books[] = $row);
+
+		return $books;
+
+	}
 
 }
 

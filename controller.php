@@ -17,9 +17,12 @@ connect_db();
 		case "loginsuccess":
 			login();
 			break;	
-		case "passwordchanged"	:
+		case "passwordchanged":
 			changePassword();
 			break;
+		case "view":
+			$books = viewBooks();
+			break;	
 		case "logout":
 			logout();
 			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=index");
