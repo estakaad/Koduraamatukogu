@@ -4,6 +4,8 @@ require_once('model.php');
 session_start();
 connect_db();
 	
+	$statuses = array(1=>"Laenasin kelleltki",2=>"Laenasin kellelegi",3=>"Riiulis olemas");
+
 	$page = "index";
 
 	if (isset($_GET['page']) && $_GET['page']!=""){
@@ -16,6 +18,10 @@ connect_db();
 			break;
 		case "bookadded":
 			addBook();
+			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			break;
+		case "bookedited":
+			editBook();
 			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
 			break;
 		case "loginsuccess":
@@ -55,6 +61,9 @@ connect_db();
 			break;
 		case "settings":
 			include('views/settings.html');
+			break;
+		case "edit":
+			include('views/edit_book.html');
 			break;
 		default:
 			include('views/index.html');

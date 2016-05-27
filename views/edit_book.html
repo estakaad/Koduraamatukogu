@@ -3,12 +3,15 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 			<div class="well">
-			<form class="form-horizontal" action="controller.php?page=bookadded"  method="post">
+			<h2>Muuda raamatu infot</h2>
+			<form class="form-horizontal" action="controller.php?page=bookedited"  method="post">
+			
+			<input type="hidden" name="edit" value="<?php echo $value['id']; ?>"><br>
 
 			  <div class="form-group">
 			    <label for="lname" class="col-sm-2 control-label">Autori perekonnanimi</label>
 			    <div class="col-sm-6">
-			      <input type="text" id="lname" class="form-control" name="author_lastname" placeholder="Autori perekonnanimi">
+			      <input type="text" id="lname" class="form-control" name="author_lastname" value="<?php if (isset($value['last_name'])) echo htmlspecialchars($value['last_name']); ?>"/> placeholder="Autori perekonnanimi">
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>
@@ -16,7 +19,7 @@
 			  <div class="form-group">
 			    <label for="fname" class="col-sm-2 control-label">Autori eesnimi</label>
 			    <div class="col-sm-6">
-			      <input type="text" id="fname" class="form-control" name="author_firstname" placeholder="Autori eesnimi">
+			      <input type="text" id="fname" class="form-control" name="author_firstname" placeholder="Autori eesnimi" value="<?php if (isset($value['first_name'])) echo htmlspecialchars($value['first_name']); ?>"/>
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>
@@ -24,7 +27,7 @@
 			<div class="form-group">
 			    <label for="title" class="col-sm-2 control-label">Teose pealkiri</label>
 			    <div class="col-sm-6">
-			      <input type="text" id="title" class="form-control" name="book_title" placeholder="Teose pealkiri">
+			      <input type="text" id="title" class="form-control" name="book_title" placeholder="Teose pealkiri" value="<?php if (isset($value['book_title'])) echo htmlspecialchars($value['book_title']); ?>"/>
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>
@@ -44,14 +47,14 @@
 			  <div class="form-group">
 			    <label for="notes" class="col-sm-2 control-label">Märkused</label>
 			    <div class="col-sm-6">
-			      <input type="text" id="notes" class="form-control" name="book_notes" placeholder="Märkused">
+			      <input type="text" id="notes" class="form-control" name="book_notes" placeholder="Märkused" value="<?php if (isset($value['book_notes'])) echo htmlspecialchars($value['book_notes']); ?>"/>>
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>
 
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-success">Lisa</button>
+			      <button type="submit" class="btn btn-success">Muuda</button>
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>

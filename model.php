@@ -161,7 +161,7 @@ function changePassword() {
 }
 
 function addBook(){
-	print_r("hakkab lisama");
+
 	if (isset($_SESSION['user'])) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
@@ -176,17 +176,20 @@ function addBook(){
 		if(empty($_POST['book_title'])) {
 			$errors[] = "Teose pealkiri on puudu.";
 		}
+		if(!isset($_POST['bookstatus'])) {
+			$errors[] = "Staatus on puudu.";
+		}
 
 		global $connection;
 		$id = $_SESSION['id'];
-
   		$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
   		$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
   		$title = mysqli_real_escape_string($connection, $_POST['book_title']);
   		$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
+  		$status = mysqli_real_escape_string($connection, $_POST['bookstatus']);
 
 		if (empty($errors)) {
-			$result = mysqli_query($connection, "INSERT INTO eprangel_books (user_id, last_name, first_name, title, notes) VALUES ('$id', '$lastname', '$firstname', '$title', '$notes')");
+			$result = mysqli_query($connection, "INSERT INTO eprangel_books (user_id, last_name, first_name, title, status, notes) VALUES ('$id', '$lastname', '$firstname', '$title', '$status', '$notes')");
 
 			$rows = mysqli_affected_rows($connection);
 
@@ -205,6 +208,58 @@ function addBook(){
 
 }
 
+function getBookInfo($id) {
+	global $connection;
+
+	$query = "SELECT * FROM eprangel_books WHERE id=".$id;
+
+	$result = mysqli_query($connection, $query) or die("Ei saanud raamatu infot.");
+ 	
+ 	if ($bookInfo = mysqli_fetch_assoc($result)) {
+		return $bookInfo;
+	}
+	else {
+		header("Location: ?page=view");
+	}
+}
+
+function editBook() {
+	global $connection;
+	
+	if (empty($_SESSION['user'])) {
+		header("Location: ?page=login");
+	}
+	
+	if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id']) && $_GET['id'] != "") {
+		$id = $_GET['id'];
+		$book = getBookInfo(mysqli_real_escape_string($connection, $id)); 
+	} else {
+		header("Location: ?page=view");
+	}
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit'])) {
+
+		$id = $_POST['edit'];	
+
+		$book = getBookInfo(mysqli_real_escape_string($connection, $id));
+		
+		$book['lastname'] = mysqli_real_escape_string($connection, $_POST["author_lastname"]);
+		$book['firstname'] = mysqli_real_escape_string($connection, $_POST["author_firstname"]);
+		$book['title'] = mysqli_real_escape_string($connection, $_POST["book_title"]);
+		//$book['status'] = mysqli_real_escape_string($connection, $_POST["status"]);
+		$book['notes'] = mysqli_real_escape_string($connection, $_POST["book_notes"]);
+
+		$query = "UPDATE eprangel_books SET lastname='$book['lastname']', firstname='$book['firstname']', title='$book['title']', notes='$book['notes']' WHERE id='$id'"; 
+
+		$result = mysqli_query($connection, $query) or die("Ei muutnud midagi");
+
+		include_once('views/edit_book.html');
+	}
+
+function removeBook() {
+
+}
+
 function viewBooks(){
 	if (isset($_SESSION['user'])) {
 		
@@ -216,7 +271,7 @@ function viewBooks(){
 		
 		$books = array();
 
-		$result = $connection->query("SELECT last_name, first_name, title, status, notes FROM eprangel_books WHERE user_id='$id'");
+		$result = $connection->query("SELECT id, last_name, first_name, title, status, notes FROM eprangel_books WHERE user_id='$id'");
 		for ($books = array (); $row = $result->fetch_assoc(); $books[] = $row);
 
 		return $books;

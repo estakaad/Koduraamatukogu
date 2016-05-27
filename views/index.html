@@ -9,7 +9,9 @@
 					<li>Välja laenatud raamatud</li>
 					<li>Turvaliselt riiulis seisvad raamatud</li>
 				</ul>
+				<?php if(!isset($_SESSION['user'])): ?>
 				<p><a href="?page=login">Logi sisse</a> või <a href="?page=register">registreeru</a></p>
+				<?php endif; ?>
 			<div class="col-md-2"></div>
 			</div>
 	</div>
