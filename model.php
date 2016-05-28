@@ -160,8 +160,10 @@ function changePassword() {
 }
 
 function addBook(){
+	print_r("apppppiii");
 
 	if (isset($_SESSION['user'])) {
+		print_r("appi");
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$errors = array();
@@ -195,6 +197,7 @@ function addBook(){
 		
 		} else {
 			return $errors;
+			print_r($errors);
 		} 
 
 		}
@@ -222,17 +225,46 @@ function editBook() {
 	if (isset($_SESSION['user'])) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+		print_r($_get['id']);	
+			print_r("kas toimub midagi");
+		$errors = array();
+
 		global $connection;
-		
-		if (empty($errors)) {
-		
-		$query = mysqli_query($connection, "UPDATE eprangel_books SET WHERE id='$id'");
-		$rows = mysqli_affected_rows($connection);
-		
+
+  		$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
+  		$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
+  		$title = mysqli_real_escape_string($connection, $_POST['book_title']);
+  		$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
+		$status = mysqli_real_escape_string($connection, $_POST['bookstatus']);
+
+		if(empty(trim($_POST['author_lastname']))) {
+			$errors[] = "Autori perekonnanimi on puudu.";
+		}
+		if(empty(trim($_POST['author_firstname']))) {
+			$errors[] = "Autori eesnimi on puudu.";
+		}
+		if(empty(trim($_POST['book_title']))) {
+			$errors[] = "Teose pealkiri on puudu.";
 		}
 
+		if(!isset($_POST['bookstatus'])) {
+			$errors[] = "Staatus on puudu.";
+		}
+		
+		print_r($errors);
+
+		if (empty($errors)) {
+			echo "hakkab raamatut muutma";
+			$query = mysqli_query($connection, "UPDATE eprangel_books SET last_name='$lastname', first_name='$firstname', title='$title', status='$status', notes='$notes' WHERE id='$id'");
+			$rows = mysqli_affected_rows($connection);
+			print_r($rows);
+		}
+
+	} else {
+		include_once 'views/edit_book.html';
+	}	
+
 	}
-}
 }
 
 function removeBook() {

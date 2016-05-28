@@ -4,8 +4,6 @@ require_once('model.php');
 session_start();
 connect_db();
 	
-	//$statuses = array(1=>"Laenasin kelleltki",2=>"Laenasin kellelegi",3=>"Riiulis olemas");
-
 	$page = "index";
 
 	if (isset($_GET['page']) && $_GET['page']!=""){
@@ -27,6 +25,9 @@ connect_db();
 			break;
 		case "loginsuccess":
 			login();
+			break;	
+		case "bookedited":
+			editBook();
 			break;	
 		case "passwordchanged":
 			changePassword();
@@ -65,6 +66,13 @@ connect_db();
 		case "passwordchanged":
 			if (isset($_SESSION['user'])) {
 				include('views/passwordchanged.html');				
+			} else {
+				include('views/index.html');				
+			}		
+			break;	
+		case "bookedited":
+			if (isset($_SESSION['user'])) {
+				include('views/view_books.html');				
 			} else {
 				include('views/index.html');				
 			}		
