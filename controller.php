@@ -4,7 +4,7 @@ require_once('model.php');
 session_start();
 connect_db();
 	
-	$statuses = array(1=>"Laenasin kelleltki",2=>"Laenasin kellelegi",3=>"Riiulis olemas");
+	//$statuses = array(1=>"Laenasin kelleltki",2=>"Laenasin kellelegi",3=>"Riiulis olemas");
 
 	$page = "index";
 
@@ -17,12 +17,13 @@ connect_db();
 			register();
 			break;
 		case "bookadded":
-			addBook();
-			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
-			break;
-		case "bookedited":
-			editBook();
-			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			$errors = addBook();
+			if (empty($errors)) {
+				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			} else {
+				$_SESSION['errors'] = $errors;
+				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=add");
+			}
 			break;
 		case "loginsuccess":
 			login();
@@ -32,6 +33,9 @@ connect_db();
 			break;
 		case "view":
 			$books = viewBooks();
+			break;	
+		case "edit":
+			$bookInfo = getBookInfo($_GET['id']);
 			break;	
 		case "logout":
 			logout();
@@ -45,25 +49,53 @@ connect_db();
 			include('views/index.html');
 			break;		
 		case "login":
-			include('views/login.html');
+			if (isset($_SESSION['user'])) {
+				include('views/index.html');				
+			} else {
+				include('views/login.html');				
+			}		
 			break;
 		case "register":
-			include('views/register.html');				
+			if (isset($_SESSION['user'])) {
+				include('views/login.html');				
+			} else {
+				include('views/register.html');				
+			}				
 			break;	
 		case "passwordchanged":
-			include('views/passwordchanged.html');	
+			if (isset($_SESSION['user'])) {
+				include('views/passwordchanged.html');				
+			} else {
+				include('views/index.html');				
+			}		
 			break;	
 		case "add":
-			include('views/add_book.html');
+			if (isset($_SESSION['user'])) {
+				include('views/add_book.html');				
+			} else {
+				include('views/index.html');				
+			}			
 			break;
 		case "view":
-			include('views/view_books.html');
+			if (isset($_SESSION['user'])) {
+				include('views/view_books.html');				
+			} else {
+				include('views/index.html');				
+			}
 			break;
 		case "settings":
-			include('views/settings.html');
+			if (isset($_SESSION['user'])) {
+				include('views/settings.html');				
+			} else {
+				include('views/index.html');				
+			}
 			break;
 		case "edit":
-			include('views/edit_book.html');
+			if (isset($_SESSION['user'])) {
+				include('views/edit_book.html');				
+			} else {
+				include('views/index.html');				
+			}
 			break;
 		default:
 			include('views/index.html');

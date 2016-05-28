@@ -3,7 +3,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 			<div class="well">
-			<form class="form-horizontal" action="controller.php?page=bookadded"  method="post">
+			<form class="form-horizontal" action="controller.php?page=add"  method="post">
 
 			  <div class="form-group">
 			    <label for="lname" class="col-sm-2 control-label">Autori perekonnanimi</label>
@@ -56,7 +56,8 @@
 			    <div class="col-sm-4"></div>
 			  </div>
 			</form>
-
+			<?php print_r($_SESSION['errors']); 
+			unset($_SESSION['errors']) ?>
 			<div class="col-md-2"></div>
 			</div>
 	</div>
