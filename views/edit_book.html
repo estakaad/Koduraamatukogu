@@ -5,9 +5,9 @@
 			<div class="well">
 			<h2>Muuda raamatu infot</h2>
 
-			<form class="form-horizontal" action="?page=controller.php?page=bookedited" method="post">
+			<form class="form-horizontal" action="controller.php?page=bookedited" method="post">
 
-			<input type="hidden" name="edit" value="<?php echo $_GET['id'] ?>"><br>
+			<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>"><br>
 
 			  <div class="form-group">
 			    <label for="lname" class="col-sm-2 control-label">Autori perekonnanimi</label>
@@ -62,5 +62,6 @@
 			</form>
 			<div class="col-md-2"></div>
 			</div>
+
 	</div>
 </div>

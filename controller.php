@@ -23,11 +23,17 @@ connect_db();
 				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=add");
 			}
 			break;
+		case "bookedited":
+			$errors = editBook();
+			if (empty($errors)) {
+				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			} else {
+				$_SESSION['errors'] = $errors;
+				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=edit&id=".$_POST['id']);
+			}
+			break;		
 		case "loginsuccess":
 			login();
-			break;	
-		case "bookedited":
-			editBook();
 			break;	
 		case "passwordchanged":
 			changePassword();
@@ -66,13 +72,6 @@ connect_db();
 		case "passwordchanged":
 			if (isset($_SESSION['user'])) {
 				include('views/passwordchanged.html');				
-			} else {
-				include('views/index.html');				
-			}		
-			break;	
-		case "bookedited":
-			if (isset($_SESSION['user'])) {
-				include('views/view_books.html');				
 			} else {
 				include('views/index.html');				
 			}		
