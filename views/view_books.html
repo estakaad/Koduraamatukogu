@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
+
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 			<div class="well">
@@ -28,13 +29,16 @@
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\" alt=\"Muuda\"></span></a></td>");
-						print_r("<td><a href=\"#\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
-						print_r("</tr>");}
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						print_r("</tr>");
+						}
 					}
 					
 				?>
 				</table>
 			</div>
+
+
 			<div class="col-md-2"></div>
 			</div>
 			<div class="well">
@@ -62,8 +66,8 @@
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"#\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
-						print_r("</tr>");}
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						}
 					}
 				?>
 				</table>
@@ -86,16 +90,16 @@
 				</tr>
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 3) {
-					print_r("<tr>");
-					print_r("<td>".$value['last_name']."</td>");
-					print_r("<td>".$value['first_name']."</td>");
-					print_r("<td>".$value['title']."</td>");
-					print_r("<td>Riiulis</td>");
-					print_r("<td>".$value['notes']."</td>");
-					print_r("<td>".$value['date_entered']."</td>");
-					print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"#\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
-					print_r("</tr>");}
+						print_r("<tr>");
+						print_r("<td>".$value['last_name']."</td>");
+						print_r("<td>".$value['first_name']."</td>");
+						print_r("<td>".$value['title']."</td>");
+						print_r("<td>Riiulis</td>");
+						print_r("<td>".$value['notes']."</td>");
+						print_r("<td>".$value['date_entered']."</td>");
+						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						}
 					}
 				?>
 				</table>

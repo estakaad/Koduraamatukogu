@@ -269,7 +269,17 @@ function editBook() {
 
 
 function removeBook() {
+	if(isset($_GET['id'])) { 
+		
+		$errors = array();
 
+		global $connection;
+
+		$id = mysqli_real_escape_string($connection, $_GET['id']);
+
+		$query = mysqli_query($connection, "DELETE FROM eprangel_books WHERE id='$id'");
+       
+     }
 }
 
 function viewBooks(){

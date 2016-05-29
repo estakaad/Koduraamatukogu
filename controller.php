@@ -32,6 +32,10 @@ connect_db();
 				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=edit&id=".$_POST['id']);
 			}
 			break;		
+		case "removebook":
+			removeBook();
+			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			break;	
 		case "loginsuccess":
 			login();
 			break;	
