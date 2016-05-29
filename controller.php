@@ -17,24 +17,24 @@ connect_db();
 		case "bookadded":
 			$errors = addBook();
 			if (empty($errors)) {
-				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=view");
 			} else {
 				$_SESSION['errors'] = $errors;
-				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=add");
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=add");
 			}
 			break;
 		case "bookedited":
 			$errors = editBook();
 			if (empty($errors)) {
-				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=view");
 			} else {
 				$_SESSION['errors'] = $errors;
-				header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=edit&id=".$_POST['id']);
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=edit&id=".$_POST['id']);
 			}
 			break;		
 		case "removebook":
 			removeBook();
-			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=view");
+			header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=view");
 			break;	
 		case "loginsuccess":
 			login();
@@ -50,7 +50,7 @@ connect_db();
 			break;	
 		case "logout":
 			logout();
-			header("Location: http://enos.itcollege.ee/~eprangel/uus/controller.php?page=index");
+			header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=index");
 		}
 
 	require_once('views/head.html'); 
