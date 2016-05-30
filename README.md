@@ -1,2 +1,2 @@
 # Koduraamatukogu
-Loo konto, et sisestafa, muuta ja kustutada raamatuid, mille on kelleltki või kellelegi laenanud.
+Loo konto, et sisestada, muuta ja kustutada raamatuid, mille oled kelleltki või kellelegi laenanud.
