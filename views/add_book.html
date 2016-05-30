@@ -1,82 +1,106 @@
 <div class="container-fluid">
-	<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-			<div class="well">
-			<h2>Lisa raamat</h2>
-			<form class="form-horizontal" action="controller.php?page=bookadded"  method="post">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
 
-				<div class="form-group">
-			    <label for="title" class="col-sm-2 control-label">Teose pealkiri</label>
-			    <div class="col-sm-6">
-			      <input type="text" id="title" class="form-control" name="book_title" placeholder="Teose pealkiri">
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
+        <div class="col-md-8">
+            <div class="well">
+                <h2>Lisa raamat</h2>
 
-			  <div class="form-group">
-			    <label for="lname" class="col-sm-2 control-label">Autori perekonnanimi</label>
-			    <div class="col-sm-6">
-			      <input type="text" id="lname" class="form-control" name="author_lastname" placeholder="Autori perekonnanimi">
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
+                <form action="controller.php?page=bookadded" class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">Teose pealkiri</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="title" name="book_title" placeholder="Teose pealkiri" type="text">
+                        </div>
 
-			  <div class="form-group">
-			    <label for="fname" class="col-sm-2 control-label">Autori eesnimi</label>
-			    <div class="col-sm-6">
-			      <input type="text" id="fname" class="form-control" name="author_firstname" placeholder="Autori eesnimi">
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="lname">Autori perekonnanimi</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="lname" name="author_lastname" placeholder="Autori perekonnanimi" type="text">
+                        </div>
 
-			  <div class="form-group">
-			    <label for="status" class="col-sm-2 control-label">Staatus</label>
-			    <div class="col-sm-2">
-			      <select class="form-control" id="status" name="bookstatus">
-					  <option value="1">Laenasin kelleltki</option>
-					  <option value="2">Laenasin kellelegi</option>
-					  <option value="3">Riiulis olemas</option>
-					</select>
-			    </div>
-			    <div class="col-sm-8"></div>
-			  </div>
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
 
-			  <div class="form-group">
-			    <label for="notes" class="col-sm-2 control-label">Märkused</label>
-			    <div class="col-sm-6">
-			      <input type="text" id="notes" class="form-control" name="book_notes" placeholder="Märkused">
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="fname">Autori eesnimi</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="fname" name="author_firstname" placeholder="Autori eesnimi" type="text">
+                        </div>
 
-			  <div class="form-group">
-			    <label for="notes" class="col-sm-2 control-label"></label>
-			    <div class="col-sm-6">
-		      	<?php if(isset($_SESSION['errors'])): ?>
-				<div class="alert alert-danger" role="alert">
-					<ul>
-					<p><?php foreach($_SESSION['errors'] as $error=>$message):
-						echo '<li>'.$message.'</li>';
-						endforeach; ?></p>
-					</ul>	
-				</div> 
-				<?php unset($_SESSION['errors']); ?>
-				<?php endif; ?>			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="status">Staatus</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" id="status" name="bookstatus">
+                                <option value="1">
+                                    Laenasin kelleltki
+                                </option>
+                                <option value="2">
+                                    Laenasin kellelegi
+                                </option>
+                                <option value="3">
+                                    Riiulis olemas
+                                </option>
+                            </select>
+                        </div>
 
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-success">Lisa</button>
+                        <div class="col-sm-8">
+                        </div>
+                    </div>
 
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
-			</form>
-			<div class="col-md-2"></div>
-			</div>
-	</div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="notes">Märkused</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="notes" name="book_notes" placeholder="Märkused" type="text">
+                        </div>
+
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="notes"></label>
+                        <div class="col-sm-6">
+                            <?php if(isset($_SESSION['errors'])): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <div style="margin-left: 2em">
+                                    <p>
+                                        <?php foreach($_SESSION['errors'] as $error=>$message):
+                                        echo '<li>'.$message.'</li>';
+                                        endforeach; ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <?php unset($_SESSION['errors']); ?><?php endif; ?>
+                        </div>
+
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-success" type="submit">Lisa</button>
+                        </div>
+
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

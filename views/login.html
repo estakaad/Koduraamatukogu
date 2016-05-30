@@ -1,21 +1,41 @@
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+        </div>
 
-<div class="container-fluid">
-		<div class="row">
-				<div class="col-md-5"></div>
-				<div class="col-md-2">
-				<div class="well">
-					<form class="form-signin" action="controller.php?page=loginsuccess"  method="post">
-				        <h2 class="form-signin-heading">Logi sisse</h2>
-				        
-				        <label for="inputEmail" class="sr-only">E-posti aadress</label>
-				        <input type="email" id="inputEmail" class="form-control" name="login_email" placeholder="Email address" required autofocus>
-				        
-				        <label for="inputPassword" class="sr-only">Salasõna</label>
-				        <input type="password" id="inputPassword" class="form-control" name="login_password" placeholder="Password" required>
-				        
-				        <button class="btn btn-lg btn-primary btn-block" type="submit">Logi sisse</button>
-				      </form>
-				<div class="col-md-5"></div>
-				</div>
-		</div>
+        <div class="col-md-2">
+            <div class="well">
+                <form action="controller.php?page=loginsuccess" class="form-signin" method="post">
+                    <h2 class="form-signin-heading">
+                        Logi sisse
+                    </h2>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputEmail">E-posti aadress</label> <input autofocus="" class="form-control" id="inputEmail" name="login_email" placeholder="E-posti aadress" required="" type="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Salasõna</label> <input class="form-control" id="inputPassword" name="login_password" placeholder="Salasõna" required="" type="password">
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sisene</button>
+                </form>
+                
+                <?php if(isset($_SESSION['errors'])): ?>
+                <div class="alert alert-danger" role="alert">
+                    <div style="margin-left: 2em">
+                        <p>
+                            <?php foreach($_SESSION['errors'] as $error=>$message):
+                            echo '<li>'.$message.'</li>';
+                            endforeach; ?>
+                        </p>
+                    </div>
+                </div>
+                <?php unset($_SESSION['errors']); ?>
+                <?php endif; ?>
+
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

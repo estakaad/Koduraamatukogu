@@ -1,28 +1,46 @@
-
 <div class="container-fluid">
-		<div class="row">
-				<div class="col-md-5"></div>
-				<div class="col-md-2">
-				<div class="well">
-					<form class="form-register" action="controller.php?page=registersuccess" method="post">
-				        <h2 class="form-signin-heading">Registreeru</h2>
-				        
-				        <label for="inputName" class="sr-only">Nimi</label>
-				        <input type="text" id="inputName" name="name" class="form-control" placeholder="Nimi" required autofocus>
+    <div class="row">
+        <div class="col-md-5">
+        </div>
 
-				        <label for="inputEmail" class="sr-only">E-posti aadress</label>
-				        <input type="email" id="inputEmail" name="email" class="form-control" placeholder="E-posti aadress" required autofocus>
-				        
-				        <label for="inputPassword" class="sr-only">Salasõna</label>
-				        <input type="password" id="inputPassword" name="password1" class="form-control" placeholder="Salasõna" required>
-				        <label for="inputPassword" class="sr-only">Salasõna uuesti</label>
-				        <input type="password" id="inputPassword" name="password2" class="form-control" placeholder="Salasõna uuesti" required>
+        <div class="col-md-2">
+            <div class="well">
+                <form action="controller.php?page=registersuccess" class="form-register" method="post">
+                    <h2 class="form-signin-heading">
+                        Registreeru
+                    </h2>
 
-				        <button class="btn btn-lg btn-primary btn-block" type="submit">Registreeru</button>
-				      </form>
-				<div class="col-md-5"></div>
-				</div>
-		</div>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputName">Nimi</label> <input autofocus="" class="form-control" id="inputName" name="name" placeholder="Nimi" required="" type="text">
+                    </div>
 
+                    <div class="form-group">
+                        <label class="sr-only" for="inputEmail">E-posti aadress</label> <input autofocus="" class="form-control" id="inputEmail" name="email" placeholder="E-posti aadress" required="" type="email">
+                    </div>
 
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Salasõna</label> <input class="form-control" id="inputPassword" name="password1" placeholder="Salasõna" required="" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Salasõna uuesti</label> <input class="form-control" id="inputPassword" name="password2" placeholder="Salasõna uuesti" required="" type="password">
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registreeru</button>
+                </form>
+                <?php if(isset($_SESSION['errors'])): ?>
+                <div class="alert alert-danger" role="alert">
+                    <div style="margin-left: 2em">
+                        <p>
+                            <?php foreach($_SESSION['errors'] as $error=>$message):
+                            echo '<li>'.$message.'</li>';
+                            endforeach; ?>
+                        </p>
+                    </div>
+                </div>
+                <?php unset($_SESSION['errors']); ?><?php endif; ?>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

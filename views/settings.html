@@ -1,41 +1,52 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-5"></div>
-		<div class="col-md-2">
-		<div class="well">
-			<form class="form-signin" action="controller.php?page=passwordchanged"  method="post">
-		        <h2 class="form-signin-heading">Muuda salasõna</h2>
-		       
-		        <label for="inputPassword" class="sr-only">Vana salasõna</label>
-		        <input type="password" id="inputPassword" class="form-control" name="old_password" placeholder="Vana salasõna" required>
-		        
-		        <label for="inputPassword" class="sr-only">Uus salasõna</label>
-		        <input type="password" id="inputPassword" class="form-control" name="new_password1" placeholder="Uus salasõna" required>
-		        
-		        <label for="inputPassword" class="sr-only">Uus salasõna uuesti</label>
-		        <input type="password" id="inputPassword" class="form-control" name="new_password2" placeholder="Uus salasõna uuesti" required>
-		        <button class="btn btn-lg btn-primary btn-block" type="submit">Muuda salasõna</button>
-		      </form>
-		      	<?php if(isset($_SESSION['errors'])): ?>
-				<div class="alert alert-danger" role="alert">
-					<ul>
-					<p><?php foreach($_SESSION['errors'] as $error=>$message):
-						echo '<li>'.$message.'</li>';
-						endforeach; ?></p>
-					</ul>	
-				</div> 
-				<?php unset($_SESSION['errors']); ?>
-				<?php endif; ?>
-				
-				<?php if(isset($_SESSION['success'])): ?>
-				<div class="alert alert-success" role="alert">
-					<p><?php print_r($_SESSION['success']); ?></p>
-				</div> 
-				<?php unset($_SESSION['success']); ?>
-				<?php endif; ?>
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+        </div>
 
-		<div class="col-md-2"></div>
-		</div>
-		</div>
-	</div>
+        <div class="col-md-2">
+            <div class="well">
+                <form action="controller.php?page=passwordchanged" class="form-signin" method="post">
+                    <h2 class="form-signin-heading">
+                        Muuda salasõna
+                    </h2>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Vana salasõna</label> <input class="form-control" id="inputPassword" name="old_password" placeholder="Vana salasõna" required="" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Uus salasõna</label> <input class="form-control" id="inputPassword" name="new_password1" placeholder="Uus salasõna" required="" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Uus salasõna uuesti</label> <input class="form-control" id="inputPassword" name="new_password2" placeholder="Uus salasõna uuesti" required="" type="password">
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Muuda salasõna</button>
+                </form>
+                
+                <?php if(isset($_SESSION['errors'])): ?>
+                <div class="alert alert-danger" role="alert">
+                    <div style="margin-left: 2em">
+                        <p>
+                            <?php foreach($_SESSION['errors'] as $error=>$message):
+                            echo '<li>'.$message.'</li>';
+                            endforeach; ?>
+                        </p>
+                    </div>
+                </div>
+                <?php unset($_SESSION['errors']); ?>
+                <?php endif; ?>
+
+                <?php if(isset($_SESSION['success'])): ?>
+                <div class="alert alert-success" role="alert">
+                    <p>
+                        <?php print_r($_SESSION['success']); ?>
+                    </p>
+                </div>
+                <?php unset($_SESSION['success']); ?><?php endif; ?>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

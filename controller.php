@@ -12,7 +12,13 @@ connect_db();
 
 	switch($page){
 		case "registersuccess":
-			register();
+			$errors = register();
+			if (empty($errors)) {
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=index");
+			} else {
+				$_SESSION['errors'] = $errors;
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=register");
+			}
 			break;
 		case "bookadded":
 			$errors = addBook();
@@ -37,8 +43,14 @@ connect_db();
 			header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=view");
 			break;	
 		case "loginsuccess":
-			login();
-			break;	
+			$errors = login();
+			if (empty($errors)) {
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=index");
+			} else {
+				$_SESSION['errors'] = $errors;
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/controller.php?page=login");
+			}
+			break;
 		case "passwordchanged":
 			$errors = changePassword();
 			$_SESSION['errors'] = $errors;

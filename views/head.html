@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Koduraamatukogu</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <head>
+        <title>Koduraamatukogu</title>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link href="css/bootstrap.min.css" media="screen" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
 
-</head>
-<body>
+                    <div class="col-md-8">
+                        <!--Logo-->
 
-<nav class="navbar navbar-default">
-		<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-					<!--Logo-->
-					<div class="navbar-header">
-						<a href="?page=index" class="navbar-brand">Koduraamatukogu</a>
-					</div>
-					<?php if(isset($_SESSION['user'])): ?>
-					<div>
-						<ul class="nav navbar-nav navbar-left">
-						<li><a href="?page=view">Vaata</a></li>
-						<li><a href="?page=add">Lisa</a></li>
-						</ul>
-					</div>
-					<!-- Menüü -->
-					<div>
-						<ul class="nav navbar-nav navbar-right">
-						<li role="presentation" class="dropdown">
-						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						      <?php echo $_SESSION['user']; ?> <span class="caret"></span>
-						    </a>
-						 
-   						 <ul class="dropdown-menu">
-   							<li><a href="?page=settings">Seaded</a></li>
-							<li><a href="?page=logout">Logi välja</a></li>
-					    </ul>
-					</div>
-				<?php endif; ?>
-			</div>
-			<div class="col-md-2"></div>
-		</div>	
-		</li>
-		</ul>
-		</div>
-</div>
-</nav>
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="?page=index">Koduraamatukogu</a>
+                        </div>
+                        <?php if(isset($_SESSION['user'])): ?>
+                        <div>
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <a href="?page=view">Vaata</a>
+                                </li>
+
+                                <li>
+                                    <a href="?page=add">Lisa</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" role="presentation">
+                                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"><?php echo $_SESSION['user']; ?> <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="?page=settings">Seaded</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="?page=logout">Logi välja</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+        </nav>

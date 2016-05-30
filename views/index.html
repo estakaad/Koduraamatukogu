@@ -1,28 +1,23 @@
 <div class="container-fluid">
 	<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-			<?php if(isset($_SESSION['user'])): ?>
-				<div class="well">
-				<h2>Koduraamatukogu</h2>
-				<ul>
-					<li>Laenuks saadud raamatud</li>
-					<li>Välja laenatud raamatud</li>
-					<li>Turvaliselt riiulis seisvad raamatud</li>
-				</ul>
-				<?php if(!isset($_SESSION['user'])): ?>
-				<p><a href="?page=login">Logi sisse</a> või <a href="?page=register">registreeru</a></p>
-				<?php endif; ?>
-			<div class="col-md-2"></div>
-			</div>
-			<?php else: ?>
-				<div class="jumbotron">
-				  <h2>Raamatute raamatupidamine</h2>
-				  <p>Oma ülevaadet raamatutest, mille oled kelleltki laenanud või ise kellelegi laenuks andnud.</p>
-				  <p><a class="btn btn-primary btn" href="?page=login" role="button">Logi sisse</a> või <a href="?page=register">registreeru kasutajaks</a>, et hakata raamatuid lisama.</p>
-				</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<?php if(isset($_SESSION['user'])): ?>
+			<div class="well">
+			<p>Mine <a href="?page=view">vaata</a> oma raamatuid või <a href="?page=view">lisa</a> mõni uus.</p>
+			<?php if(!isset($_SESSION['user'])): ?>
+			<p><a href="?page=login">Logi sisse</a> või <a href="?page=register">registreeru</a></p>
 			<?php endif; ?>
+		<div class="col-md-2"></div>
+		</div>
+		<?php else: ?>
+			<div class="jumbotron">
 
+			  <p>Oma ülevaadet raamatutest, mille oled kelleltki laenanud või ise kellelegi laenuks andnud.</p>
+			  <p><a href="?page=login"?page=login" button type="button" class="btn btn-success btn-md" aria-label="Left Align">Logi sisse</a>
+			  <a href="?page=register"?page=register" button type="button" class="btn btn-primary btn-md" aria-label="Left Align">Registreeru</a></p>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>
 
