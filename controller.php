@@ -40,7 +40,8 @@ connect_db();
 			login();
 			break;	
 		case "passwordchanged":
-			changePassword();
+			$errors = changePassword();
+			$_SESSION['errors'] = $errors;
 			break;
 		case "view":
 			$books = viewBooks();
@@ -73,13 +74,6 @@ connect_db();
 				include('views/register.html');				
 			}				
 			break;	
-		case "passwordchanged":
-			if (isset($_SESSION['user'])) {
-				include('views/passwordchanged.html');				
-			} else {
-				include('views/index.html');				
-			}		
-			break;	
 		case "add":
 			if (isset($_SESSION['user'])) {
 				include('views/add_book.html');				
@@ -101,6 +95,13 @@ connect_db();
 				include('views/index.html');				
 			}
 			break;
+		case "passwordchanged":
+			if (isset($_SESSION['user'])) {
+				include('views/settings.html');				
+			} else {
+				include('views/index.html');			
+			}
+			break;	
 		case "edit":
 			if (isset($_SESSION['user'])) {
 				include('views/edit_book.html');				

@@ -9,6 +9,14 @@
 
 			<input type="hidden" name="id" value="<?php echo $_GET['id'] ?>"><br>
 
+				<div class="form-group">
+			    <label for="title" class="col-sm-2 control-label">Teose pealkiri</label>
+			    <div class="col-sm-6">
+			      <input type="text" id="title" class="form-control" name="book_title" value="<?php echo $bookInfo['title']; ?>">
+			    </div>
+			    <div class="col-sm-4"></div>
+			  </div>
+
 			  <div class="form-group">
 			    <label for="lname" class="col-sm-2 control-label">Autori perekonnanimi</label>
 			    <div class="col-sm-6">
@@ -21,14 +29,6 @@
 			    <label for="fname" class="col-sm-2 control-label">Autori eesnimi</label>
 			    <div class="col-sm-6">
 			      <input type="text" id="fname" class="form-control" name="author_firstname" value="<?php echo $bookInfo['first_name']; ?>">
-			    </div>
-			    <div class="col-sm-4"></div>
-			  </div>
-
-			<div class="form-group">
-			    <label for="title" class="col-sm-2 control-label">Teose pealkiri</label>
-			    <div class="col-sm-6">
-			      <input type="text" id="title" class="form-control" name="book_title" value="<?php echo $bookInfo['title']; ?>">
 			    </div>
 			    <div class="col-sm-4"></div>
 			  </div>

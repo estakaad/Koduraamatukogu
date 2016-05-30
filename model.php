@@ -143,24 +143,20 @@ function changePassword() {
 			$errors[] = "Uus salasõna pole see, mis selle kordus.";
 		}
 		
-		print_r($errors);
-
 		if (empty($errors)) {
-			echo "hakkab salasõna uuendama";
 			$query = mysqli_query($connection, "UPDATE eprangel_users SET passw=SHA1('$new_password1') WHERE id='$id'");
 			$rows = mysqli_affected_rows($connection);
-			print_r($rows);
+			$_SESSION['success'] = 'Salasõna edukalt muudetud.';
+		} else {
+			return $errors;
 		}
 
-	} else {
-		include_once 'views/settings.html';
-	}	
+	} 
 
 	}
 }
 
 function addBook(){
-	print_r("apppppiii");
 
 	if (isset($_SESSION['user'])) {
 
@@ -194,11 +190,18 @@ function addBook(){
 			$result = mysqli_query($connection, "INSERT INTO eprangel_books (user_id, last_name, first_name, title, status, notes) VALUES ('$id', '$lastname', '$firstname', '$title', '$status', '$notes')");
 
 			$rows = mysqli_affected_rows($connection);
-		
-		} else {
-			return $errors;
-			print_r($errors);
-		} 
+			
+			if ($status == '1') {
+				$_SESSION['success'] = 'Raamat „'.$title.'“ on edukalt lisatud. Ära siis unusta raamat tagastada.';	
+			} elseif ($status == '2') {
+				$_SESSION['success'] = 'Raamat „'.$title.'“ on edukalt lisatud. Jääb vaid loota, et selle varsti tagasi saad.';	
+			} else {
+				$_SESSION['success'] = 'Lisasid edukalt raamatu „'.$title.'“. ';
+			}
+
+			} else {
+				return $errors;
+			} 
 
 		}
 
@@ -221,7 +224,6 @@ function getBookInfo($id) {
 }
 
 function editBook() {
-	print_r("kas siia jõuab");
 
 	if (isset($_SESSION['user'])) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -256,16 +258,16 @@ function editBook() {
 				echo "hakkab raamatut muutma";
 				$query = mysqli_query($connection, "UPDATE eprangel_books SET last_name='$lastname', first_name='$firstname', title='$title', status='$status', notes='$notes' WHERE id='$id'");
 				$rows = mysqli_affected_rows($connection);
+				$_SESSION['success'] = 'Muutsid edukalt raamatu „'.$title.'“ andmeid.';
+			}
 
 			} else {
 				return $errors;
-
-			}	
+			} 
 
 		} 
 
 	}
-}
 
 
 function removeBook() {

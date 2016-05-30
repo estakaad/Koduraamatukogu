@@ -3,21 +3,32 @@
 
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-			<div class="well">
+
 			
+			<?php if(isset($_SESSION['success'])): ?>
+					<div class="alert alert-success" role="alert">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<p><?php print_r($_SESSION['success']); ?></p>
+					</div> 
+				<?php unset($_SESSION['success']); ?>
+				<?php endif; ?>
+
+			<div class="col-md-2"></div>
+			
+
+			<div class="well">
 			<h2>Kelleltki laenatud raamatud</h2>
 			<div class="table-responsive">
 				<table class="table table-striped">
-				<tr>
+				<thead>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
 					<th>Pealkiri</th>
-					<th>Staatus</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
 					<th>Kustuta</th>
-				</tr>
+				</thead>
 
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 1) {
@@ -25,7 +36,6 @@
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
 						print_r("<td>".$value['title']."</td>");
-						print_r("<td>Kelleltki laenatud</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\" alt=\"Muuda\"></span></a></td>");
@@ -37,32 +47,28 @@
 				?>
 				</table>
 			</div>
-
-
 			<div class="col-md-2"></div>
 			</div>
+
 			<div class="well">
-			
 			<h2>Kellelegi laenatud raamatud</h2>
 			<div class="table-responsive">
 				<table class="table table-striped">
-				<tr>
+				<thead>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
 					<th>Pealkiri</th>
-					<th>Staatus</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
 					<th>Kustuta</th>
-				</tr>
+				</thead>
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 2) {
 						print_r("<tr>");
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
 						print_r("<td>".$value['title']."</td>");
-						print_r("<td>Kellelegi laenatud</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
@@ -74,27 +80,26 @@
 			</div>
 			<div class="col-md-2"></div>
 			</div>
+
 			<div class="well">
 			<h2>Riiulis olevad raamatud</h2>
 			<div class="table-responsive">
 				<table class="table table-striped">
-				<tr>
+				<thead>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
 					<th>Pealkiri</th>
-					<th>Staatus</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
 					<th>Kustuta</th>
-				</tr>
+				</thead>
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 3) {
 						print_r("<tr>");
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
 						print_r("<td>".$value['title']."</td>");
-						print_r("<td>Riiulis</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
