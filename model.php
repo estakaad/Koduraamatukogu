@@ -56,6 +56,8 @@ function register() {
 			$rows = mysqli_affected_rows($connection);
 			if ($rows > 0) {
 				$_SESSION['user'] = $users_name;
+				$result = mysqli_query($connection, "SELECT user_id FROM eprangel_users WHERE email='$users_email'");
+				$_SESSION['user_id'] = $result;
 			}
 		}
 		else {
@@ -90,7 +92,7 @@ function login() {
 			$_SESSION['user'] = $result['session_name'];
 			$query = mysqli_query($connection, "SELECT id AS session_id FROM eprangel_users WHERE email='$users_email'");
 			$result = mysqli_fetch_assoc($query);
-			$_SESSION['id'] = $result['session_id'];
+			$_SESSION['user_id'] = $result['session_id'];
 		}
 		else {
 			return $errors;
@@ -103,7 +105,7 @@ function changePassword() {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
 			global $connection;
-			$id = $_SESSION['id'];
+			$id = $_SESSION['user_id'];
 			$old_password = mysqli_real_escape_string($connection, $_POST['old_password']);
 			$new_password1 = mysqli_real_escape_string($connection, $_POST['new_password1']);
 			$new_password2 = mysqli_real_escape_string($connection, $_POST['new_password2']);
@@ -166,7 +168,7 @@ function addBook() {
 			}
 
 			global $connection;
-			$id = $_SESSION['id'];
+			$id = $_SESSION['user_id'];
 			$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
 			$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
 			$title = mysqli_real_escape_string($connection, $_POST['book_title']);
@@ -249,7 +251,7 @@ function removeBook() {
 function viewBooks() {
 	if (isset($_SESSION['user'])) {
 		global $connection;
-		$id = $_SESSION['id'];
+		$id = $_SESSION['user_id'];
 		$query = mysqli_query($connection, "SELECT * FROM eprangel_books WHERE user_id='$id'");
 		$row = mysqli_fetch_assoc($query);
 		$books = array();
