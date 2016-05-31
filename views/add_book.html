@@ -7,7 +7,7 @@
             <div class="well">
                 <h2>Lisa raamat</h2>
 
-                <form action="controller.php?page=bookadded" class="form-horizontal" method="post">
+                <form action="index.php?page=bookadded" class="form-horizontal" method="post">
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="title">Teose pealkiri</label>
                         <div class="col-sm-6">
@@ -76,12 +76,13 @@
                                 <div style="margin-left: 2em">
                                     <p>
                                         <?php foreach($_SESSION['errors'] as $error=>$message):
-                                        echo '<li>'.$message.'</li>';
+                                        echo '<p>'.$message.'</p>';
                                         endforeach; ?>
                                     </p>
                                 </div>
                             </div>
-                            <?php unset($_SESSION['errors']); ?><?php endif; ?>
+                            <?php unset($_SESSION['errors']); ?>
+                          <?php endif; ?>
                         </div>
 
                         <div class="col-sm-4">

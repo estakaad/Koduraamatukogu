@@ -5,7 +5,7 @@
 
         <div class="col-md-2">
             <div class="well">
-                <form action="controller.php?page=registersuccess" class="form-register" method="post">
+                <form action="index.php?page=registersuccess" class="form-register" method="post">
                     <h2 class="form-signin-heading">
                         Registreeru
                     </h2>
@@ -27,12 +27,13 @@
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Registreeru</button>
                 </form>
+                <br/>
                 <?php if(isset($_SESSION['errors'])): ?>
                 <div class="alert alert-danger" role="alert">
-                    <div style="margin-left: 2em">
+                    <div style="margin-left: 1em">
                         <p>
                             <?php foreach($_SESSION['errors'] as $error=>$message):
-                            echo '<li>'.$message.'</li>';
+                            echo '<p>'.$message.'</p>';
                             endforeach; ?>
                         </p>
                     </div>

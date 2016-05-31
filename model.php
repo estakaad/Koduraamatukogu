@@ -35,6 +35,10 @@ function register() {
 			$errors[] = "Salasõna on puudu.";
 		}
 
+		if (strlen(trim($_POST['password1'])) < 9) {
+			$errors[] = "Salasõna peab koosnema vähemalt 8 tähemärgist.";
+		}
+
 		if (empty(trim($_POST['password2']))) {
 			$errors[] = "Salasõna kordus on puudu.";
 		}
@@ -125,6 +129,10 @@ function changePassword() {
 				$errors[] = "Uus salasõna pole see, mis selle kordus.";
 			}
 
+			if (strlen(trim($_POST['new_password1'])) < 9 || strlen(trim($_POST['new_password2'])) < 9) {
+			$errors[] = "Salasõna peab koosnema vähemalt 8 tähemärgist.";
+			}
+
 			if (empty($errors)) {
 				$query = mysqli_query($connection, "UPDATE eprangel_users SET passw=SHA1('$new_password1') WHERE id='$id'");
 				$rows = mysqli_affected_rows($connection);
@@ -202,6 +210,7 @@ function editBook() {
 			$title = mysqli_real_escape_string($connection, $_POST['book_title']);
 			$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
 			$status = mysqli_real_escape_string($connection, $_POST['bookstatus']);
+
 			if (empty(trim($_POST['author_lastname']))) {
 				$errors[] = "Autori perekonnanimi on puudu.";
 			}
@@ -214,30 +223,26 @@ function editBook() {
 				$errors[] = "Teose pealkiri on puudu.";
 			}
 
-			if (!isset($_POST['bookstatus'])) {
-				$errors[] = "Staatus on puudu.";
-			}
-
 			$id = $_POST['id'];
 			if (empty($errors)) {
-				echo "hakkab raamatut muutma";
 				$query = mysqli_query($connection, "UPDATE eprangel_books SET last_name='$lastname', first_name='$firstname', title='$title', status='$status', notes='$notes' WHERE id='$id'");
 				$rows = mysqli_affected_rows($connection);
 				$_SESSION['success'] = 'Muutsid edukalt raamatu „' . $title . '“ andmeid.';
-			}
-		}
-		else {
+			} else {
 			return $errors;
 		}
+		}
+		
 	}
 }
 
 function removeBook() {
 	if (isset($_GET['id'])) {
-		$errors = array();
 		global $connection;
 		$id = mysqli_real_escape_string($connection, $_GET['id']);
 		$query = mysqli_query($connection, "DELETE FROM eprangel_books WHERE id='$id'");
+
+		$_SESSION['success'] = 'Raamat on eemaldatud.';
 	}
 }
 

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <title>Koduraamatukogu</title>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <link href="css/bootstrap.min.css" media="screen" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/script.js"></script>
     </head>
     <body>
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="row">
@@ -17,12 +18,10 @@
                     </div>
 
                     <div class="col-md-8">
-                        <!--Logo-->
-
                         <div class="navbar-header">
                             <a class="navbar-brand" href="?page=index">Koduraamatukogu</a>
                         </div>
-                        <?php if(isset($_SESSION['user'])): ?>
+                            <?php if(isset($_SESSION['user'])): ?>
                         <div>
                             <ul class="nav navbar-nav navbar-left">
                                 <li>
@@ -51,7 +50,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <?php endif; ?>
+                          <?php endif; ?>    
                     </div>
 
                     <div class="col-md-2">
@@ -59,3 +58,4 @@
                 </div>
             </div>
         </nav>
+  

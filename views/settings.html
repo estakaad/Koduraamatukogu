@@ -5,7 +5,7 @@
 
         <div class="col-md-2">
             <div class="well">
-                <form action="controller.php?page=passwordchanged" class="form-signin" method="post">
+                <form action="index.php?page=passwordchanged" class="form-signin" method="post">
                     <h2 class="form-signin-heading">
                         Muuda salasõna
                     </h2>
@@ -23,13 +23,13 @@
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Muuda salasõna</button>
                 </form>
-                
+                <br/>
                 <?php if(isset($_SESSION['errors'])): ?>
                 <div class="alert alert-danger" role="alert">
                     <div style="margin-left: 2em">
                         <p>
                             <?php foreach($_SESSION['errors'] as $error=>$message):
-                            echo '<li>'.$message.'</li>';
+                            echo '<p>'.$message.'</p>';
                             endforeach; ?>
                         </p>
                     </div>

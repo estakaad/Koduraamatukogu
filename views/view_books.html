@@ -10,8 +10,8 @@
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 						<p><?php print_r($_SESSION['success']); ?></p>
 					</div> 
-				<?php unset($_SESSION['success']); ?>
-				<?php endif; ?>
+			<?php unset($_SESSION['success']); ?>
+			<?php endif; ?>
 
 			<div class="col-md-2"></div>
 			
@@ -21,9 +21,9 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<thead>
+					<th>Pealkiri</th>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
-					<th>Pealkiri</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
@@ -33,13 +33,13 @@
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 1) {
 						print_r("<tr>");
+						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
-						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\" alt=\"Muuda\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
 						print_r("</tr>");
 						}
 					}
@@ -55,9 +55,9 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<thead>
+					<th>Pealkiri</th>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
-					<th>Pealkiri</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
@@ -66,13 +66,13 @@
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 2) {
 						print_r("<tr>");
+						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
-						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
 						}
 					}
 				?>
@@ -86,9 +86,9 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<thead>
+					<th>Pealkiri</th>
 					<th>Perekonnanimi</th>
 					<th>Eesnimi</th>
-					<th>Pealkiri</th>
 					<th>Märkmed</th>
 					<th>Lisatud</th>
 					<th>Muuda</th>
@@ -97,13 +97,13 @@
 				<?php foreach($books as $key=>$value) {
 					if ($value['status'] == 3) {
 						print_r("<tr>");
+						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['last_name']."</td>");
 						print_r("<td>".$value['first_name']."</td>");
-						print_r("<td>".$value['title']."</td>");
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirmDelete()\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
 						}
 					}
 				?>
