@@ -60,6 +60,9 @@ connect_db();
 			break;	
 		case "edit":
 			$bookInfo = getBookInfo($_GET['id']);
+			if (empty($bookInfo)) {
+				header("Location: http://enos.itcollege.ee/~eprangel/Koduraamatukogu/index.php?page=index");
+			} 
 			break;	
 		case "logout":
 			logout();
