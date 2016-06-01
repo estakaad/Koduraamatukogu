@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="title">Teose pealkiri</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="title" name="book_title" type="text" value="<?php echo $bookInfo['title']; ?>">
+                            <input class="form-control" id="title" name="book_title" type="text" maxlength="128" value="<?php echo $bookInfo['title']; ?>">
                         </div>
 
                         <div class="col-sm-4">
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="lname">Autori perekonnanimi</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="lname" name="author_lastname" type="text" value="<?php echo $bookInfo['last_name']; ?>">
+                            <input class="form-control" id="lname" name="author_lastname" type="text" maxlength="128" value="<?php echo $bookInfo['last_name']; ?>">
                         </div>
 
                         <div class="col-sm-4">
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="fname">Autori eesnimi</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="fname" name="author_firstname" type="text" value="<?php echo $bookInfo['first_name']; ?>">
+                            <input class="form-control" id="fname" name="author_firstname" type="text" maxlength="128" value="<?php echo $bookInfo['first_name']; ?>">
                         </div>
 
                         <div class="col-sm-4">
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="notes">Märkused</label>
                         <div class="col-sm-6">
-                            <input class="form-control" id="notes" name="book_notes" type="text" value="<?php echo $bookInfo['notes']; ?>">
+                            <input class="form-control" id="notes" name="book_notes" type="text" maxlength="1024" value="<?php echo $bookInfo['notes']; ?>">
                         </div>
 
                         <div class="col-sm-4">

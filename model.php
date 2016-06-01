@@ -49,9 +49,9 @@ function register() {
 
 		print_r($errors);
 		if (empty($errors)) {
-			$users_name = mysqli_real_escape_string($connection, $_POST['name']);
-			$users_email = mysqli_real_escape_string($connection, $_POST['email']);
-			$users_password = mysqli_real_escape_string($connection, $_POST['password1']);
+			$users_name = mysqli_real_escape_string($connection, htmlspecialchars($_POST['name']));
+			$users_email = mysqli_real_escape_string($connection, htmlspecialchars($_POST['email']));
+			$users_password = mysqli_real_escape_string($connection, htmlspecialchars($_POST['password1']));
 			$result = mysqli_query($connection, "INSERT INTO eprangel_users (name, email, passw) VALUES ('$users_name', '$users_email', SHA1('$users_password'))");
 			$rows = mysqli_affected_rows($connection);
 			if ($rows > 0) {
@@ -70,8 +70,8 @@ function login() {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$errors = array();
 		global $connection;
-		$users_email = mysqli_real_escape_string($connection, $_POST['login_email']);
-		$users_password = mysqli_real_escape_string($connection, $_POST['login_password']);
+		$users_email = mysqli_real_escape_string($connection, htmlspecialchars($_POST['login_email']));
+		$users_password = mysqli_real_escape_string($connection, htmlspecialchars($_POST['login_password']));
 		$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE email='$users_email' AND passw=SHA1('$users_password')");
 		$row = mysqli_fetch_assoc($query);
 		if ($row['count_rows'] != 1) {
@@ -106,9 +106,9 @@ function changePassword() {
 			$errors = array();
 			global $connection;
 			$id = $_SESSION['user_id'];
-			$old_password = mysqli_real_escape_string($connection, $_POST['old_password']);
-			$new_password1 = mysqli_real_escape_string($connection, $_POST['new_password1']);
-			$new_password2 = mysqli_real_escape_string($connection, $_POST['new_password2']);
+			$old_password = mysqli_real_escape_string($connection, htmlspecialchars($_POST['old_password']));
+			$new_password1 = mysqli_real_escape_string($connection, htmlspecialchars($_POST['new_password1']));
+			$new_password2 = mysqli_real_escape_string($connection, htmlspecialchars($_POST['new_password2']));
 			$query = mysqli_query($connection, "SELECT count(*) AS count_rows FROM eprangel_users WHERE id='$id' AND passw=SHA1('$old_password')");
 			$row = mysqli_fetch_assoc($query);
 			if ($row['count_rows'] != 1) {
@@ -169,11 +169,11 @@ function addBook() {
 
 			global $connection;
 			$id = $_SESSION['user_id'];
-			$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
-			$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
-			$title = mysqli_real_escape_string($connection, $_POST['book_title']);
-			$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
-			$status = mysqli_real_escape_string($connection, $_POST['bookstatus']);
+			$lastname = mysqli_real_escape_string($connection, htmlspecialchars($_POST['author_lastname']));
+			$firstname = mysqli_real_escape_string($connection, htmlspecialchars($_POST['author_firstname']));
+			$title = mysqli_real_escape_string($connection, htmlspecialchars($_POST['book_title']));
+			$notes = mysqli_real_escape_string($connection, htmlspecialchars($_POST['book_notes']));
+			$status = mysqli_real_escape_string($connection, htmlspecialchars($_POST['bookstatus']));
 			if (empty($errors)) {
 				$result = mysqli_query($connection, "INSERT INTO eprangel_books (user_id, last_name, first_name, title, status, notes) VALUES ('$id', '$lastname', '$firstname', '$title', '$status', '$notes')");
 				$rows = mysqli_affected_rows($connection);
@@ -207,11 +207,11 @@ function editBook() {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
 			global $connection;
-			$lastname = mysqli_real_escape_string($connection, $_POST['author_lastname']);
-			$firstname = mysqli_real_escape_string($connection, $_POST['author_firstname']);
-			$title = mysqli_real_escape_string($connection, $_POST['book_title']);
-			$notes = mysqli_real_escape_string($connection, $_POST['book_notes']);
-			$status = mysqli_real_escape_string($connection, $_POST['bookstatus']);
+			$lastname = mysqli_real_escape_string($connection, htmlspecialchars($_POST['author_lastname']));
+			$firstname = mysqli_real_escape_string($connection, htmlspecialchars($_POST['author_firstname']));
+			$title = mysqli_real_escape_string($connection, htmlspecialchars($_POST['book_title']));
+			$notes = mysqli_real_escape_string($connection, htmlspecialchars($_POST['book_notes']));
+			$status = mysqli_real_escape_string($connection, htmlspecialchars($_POST['bookstatus']));
 
 			if (empty(trim($_POST['author_lastname']))) {
 				$errors[] = "Autori perekonnanimi on puudu.";

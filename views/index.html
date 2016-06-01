@@ -3,7 +3,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 		<?php if(isset($_SESSION['user'])): ?>
-			<div class="well">
+		<div class="well">
 			<p>Mine <a href="?page=view">vaata</a> oma raamatuid või <a href="?page=add">lisa</a> mõni uus.</p>
 			<?php if(!isset($_SESSION['user'])): ?>
 			<p><a href="?page=login">Logi sisse</a> või <a href="?page=register">registreeru</a></p>
@@ -12,12 +12,13 @@
 		</div>
 		<?php else: ?>
 			<div class="jumbotron">
-			<h1>Koduraamatukogu</h1>
-			  <p>Oma ülevaadet raamatutest, mille oled kelleltki laenanud või ise kellelegi laenuks andnud.</p>
-			  <p><a href="?page=login"?page=login" button type="button" class="btn btn-success btn-md" aria-label="Left Align">Logi sisse</a>
-			  <a href="?page=register"?page=register" button type="button" class="btn btn-primary btn-md" aria-label="Left Align">Registreeru</a></p>
+				<h1>Koduraamatukogu</h1>
+				<p>Oma ülevaadet raamatutest, mille oled kelleltki laenanud või ise kellelegi laenuks andnud.</p>
+				<p><a href="?page=login" class="btn btn-success btn-md" aria-label="Left Align">Logi sisse</a>
+				<a href="?page=register" class="btn btn-primary btn-md" aria-label="Left Align">Registreeru</a></p>
 			</div>
 		<?php endif; ?>
+		</div>
 	</div>
 </div>
 
