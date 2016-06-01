@@ -17,8 +17,8 @@
 			
 
 			<div class="well">
-			<h2>Kelleltki laenatud raamatud</h2>
-			<div class="table-responsive">
+			<h3><span class="glyphicon glyphicon-menu-down" onclick="showHide('firstTable')" style="cursor: pointer;"></span> Kelleltki laenatud raamatud</h3>
+			<div class="table-responsive" id="firstTable">
 				<table class="table table-striped">
 				<thead>
 					<th>Pealkiri</th>
@@ -39,7 +39,7 @@
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\" alt=\"Muuda\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
 						print_r("</tr>");
 						}
 					}
@@ -51,8 +51,8 @@
 			</div>
 
 			<div class="well">
-			<h2>Kellelegi laenatud raamatud</h2>
-			<div class="table-responsive">
+			<h3><span class="glyphicon glyphicon-menu-down" onclick="showHide('secondTable')" style="cursor: pointer;"></span> Kellelegi laenatud raamatud</h3>
+			<div class="table-responsive" id="secondTable">
 				<table class="table table-striped">
 				<thead>
 					<th>Pealkiri</th>
@@ -72,7 +72,7 @@
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
 						}
 					}
 				?>
@@ -82,8 +82,8 @@
 			</div>
 
 			<div class="well">
-			<h2>Riiulis olevad raamatud</h2>
-			<div class="table-responsive">
+			<h3><span class="glyphicon glyphicon-menu-down" onclick="showHide('thirdTable')" style="cursor: pointer;"></span> Riiulis olevad raamatud</h3>
+			<div class="table-responsive" id="thirdTable">
 				<table class="table table-striped">
 				<thead>
 					<th>Pealkiri</th>
@@ -103,7 +103,7 @@
 						print_r("<td>".$value['notes']."</td>");
 						print_r("<td>".$value['date_entered']."</td>");
 						print_r("<td><a href=\"?page=edit&id=".$value['id']."\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>");
-						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\">Eemalda</a></td>");
+						print_r("<td><a href=\"?page=removebook&id=".$value['id']."\" onclick=\"return confirm('Kas oled kindel, et tahad raamatut kustutada?')\"><span class=\"glyphicon glyphicon-remove\"></span></a></td>");
 						}
 					}
 				?>
