@@ -46,13 +46,13 @@
                         <label class="col-sm-2 control-label" for="status">Staatus</label>
                         <div class="col-sm-2">
                             <select class="form-control" id="status" name="bookstatus">
-                                <option value="1">
+                                <?php if ($bookInfo['status'] == 1) { ?><option value="1" selected><?php } else { ?><option value="1"><?php } ?>
                                     Laenasin kelleltki
                                 </option>
-                                <option value="2">
+                                <?php if ($bookInfo['status'] == 2) { ?><option value="2" selected><?php } else { ?><option value="2"><?php } ?>
                                     Laenasin kellelegi
                                 </option>
-                                <option value="3">
+                                <?php if ($bookInfo['status'] == 3) { ?><option value="3" selected><?php } else { ?><option value="3"><?php } ?>
                                     Riiulis olemas
                                 </option>
                             </select>
