@@ -1,41 +1,24 @@
- <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
+<h2>Logi sisse</h2>
 
-        <div class="col-md-4">
-            <div class="well">
-                <form action="index.php?page=loginsuccess" class="form-signin" method="post">
-                    <h2 class="form-signin-heading">
-                        Logi sisse
-                    </h2>
+<form action="index.php?page=loginsuccess" method="post" id="login">
+	<fieldset>
+		<legend>E-posti aadress</legend>
+		<input type="email" name="loginEmail"/>
+	</fieldset>
+	<fieldset>
+		<legend>Parool</legend>
+		<input type="password" name="loginPassword"/>
+	</fieldset>
+	<input type="submit" value="Logi sisse"/>
+</form>
 
-                    <div class="form-group">
-                        <label class="sr-only" for="inputEmail">E-posti aadress</label> <input autofocus="" class="form-control" id="inputEmail" name="login_email" placeholder="E-posti aadress" required=""  maxlength="1024" type="email">
-                    </div>
+<?php if(isset($_SESSION['errors'])): ?>
 
-                    <div class="form-group">
-                        <label class="sr-only" for="inputPassword">Salasõna</label> <input class="form-control" id="inputPassword" name="login_password" placeholder="Salasõna" required=""  maxlength="1024" type="password">
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sisene</button>
-                </form>
-                <br/>
-                <?php if(isset($_SESSION['errors'])): ?>
-                <div class="alert alert-danger" role="alert">
-                    <div style="margin-left: 1em">
-                        <p>
-                            <?php foreach($_SESSION['errors'] as $error=>$message):
-                            echo '<p>'.$message.'</p>';
-                            endforeach; ?>
-                        </p>
-                    </div>
-                </div>
-                <?php unset($_SESSION['errors']); ?>
-                <?php endif; ?>
+        <p>
+            <?php foreach($_SESSION['errors'] as $error=>$message):
+            echo '<p>'.$message.'</p>';
+            endforeach; ?>
+        </p>
 
-                <div class="col-md-4">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?php unset($_SESSION['errors']); ?>
+<?php endif; ?>
