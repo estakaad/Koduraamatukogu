@@ -1,4 +1,25 @@
-<?php if(isset($_SESSION['userNameForSession'])): ?>
-<p>Oled sisse loginud kasutajanimega <?php echo $_SESSION['userNameForSession'] ?></p>
-<?php endif; ?>
-<p>Siia tulevad postitused</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<?php if(isset($_SESSION['user'])): ?>
+		<div class="well">
+			<p>Mine <a href="?page=view">vaata</a> oma raamatuid või <a href="?page=add">lisa</a> mõni uus.</p>
+			<?php if(!isset($_SESSION['user'])): ?>
+			<p><a href="?page=login">Logi sisse</a> või <a href="?page=register">registreeru</a></p>
+			<?php endif; ?>
+		<div class="col-md-2"></div>
+		</div>
+		<?php else: ?>
+			<div class="jumbotron">
+				<h1>Koduraamatukogu</h1>
+				<p>Oma ülevaadet raamatutest, mille oled kelleltki laenanud või ise kellelegi laenuks andnud.</p>
+				<p><a href="?page=login" class="btn btn-success btn-md" aria-label="Left Align">Logi sisse</a>
+				<a href="?page=register" class="btn btn-primary btn-md" aria-label="Left Align">Registreeru</a></p>
+			</div>
+		<?php endif; ?>
+		</div>
+	</div>
+</div>
+
+

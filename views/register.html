@@ -1,32 +1,47 @@
-<h2>Registreeru</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
 
-<form action="index.php?page=registersuccess" method="post" id="register">
-	<fieldset>
-		<legend>Nimi</legend>
-		<input type="text" name="name"/>
-	</fieldset>
-	<fieldset>
-		<legend>E-posti aadress</legend>
-		<input type="email" name="email"/>
-	</fieldset>
-	<fieldset>
-		<legend>Parool</legend>
-		<input type="password" name="password"/>
-	</fieldset>
-	<fieldset>
-		<legend>Parool uuesti</legend>
-		<input type="password" name="confirmPassword"/>
-	</fieldset>
-	<input type="submit" value="Registreeru"/>
-</form>
+        <div class="col-md-4">
+            <div class="well">
+                <form action="index.php?page=registersuccess" class="form-register" method="post">
+                    <h2 class="form-signin-heading">
+                        Registreeru
+                    </h2>
 
-<?php if(isset($_SESSION['errors'])): ?>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputName">Nimi</label> <input autofocus="" class="form-control" id="inputName" name="name" placeholder="Nimi" required=""  maxlength="100" type="text">
+                    </div>
 
-        <p>
-            <?php foreach($_SESSION['errors'] as $error=>$message):
-            echo '<p>'.$message.'</p>';
-            endforeach; ?>
-        </p>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputEmail">E-posti aadress</label> <input autofocus="" class="form-control" id="inputEmail" name="email" placeholder="E-posti aadress" required=""  maxlength="1024" type="email">
+                    </div>
 
-<?php unset($_SESSION['errors']); ?>
-<?php endif; ?>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Salasõna</label> <input class="form-control" id="inputPassword" name="password1" placeholder="Salasõna" required="" maxlength="1024" type="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Salasõna uuesti</label> <input class="form-control" id="inputPassword" name="password2" placeholder="Salasõna uuesti" maxlength="1024" required="" type="password">
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Registreeru</button>
+                </form>
+                <br/>
+                <?php if(isset($_SESSION['errors'])): ?>
+                <div class="alert alert-danger" role="alert">
+                    <div style="margin-left: 1em">
+                        <p>
+                            <?php foreach($_SESSION['errors'] as $error=>$message):
+                            echo '<p>'.$message.'</p>';
+                            endforeach; ?>
+                        </p>
+                    </div>
+                </div>
+                <?php unset($_SESSION['errors']); ?><?php endif; ?>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
